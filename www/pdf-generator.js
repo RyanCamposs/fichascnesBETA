@@ -197,7 +197,7 @@ async function gerarPDF() {
 
                  addObservations(campos['Observações']);
 
-        } else if (formTitle === "ficha 1") {   // FICHA 1 PDF
+        } else if (formTitle === "Ficha 1") {   // FICHA 1 PDF
             const professionalFields = [
                 ['CNPJ da Empresa', campos['CNPJ da Empresa']],
                 ['CNES da Empresa', campos['CNES da Empresa']],
@@ -221,8 +221,6 @@ async function gerarPDF() {
                 ['Órgão Expedidor', campos['Órgão Expedidor']],
             ];
             addTableSection('DADOS DO ESTABELECIMENTO', establishmentFields);
-
-
         } 
 
         // Campo de assinatura
