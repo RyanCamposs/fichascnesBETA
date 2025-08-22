@@ -29,7 +29,7 @@ function abrirFormulario(tipo) {
                     </div>
                     <div class="campo">
                         <span>Situacao</span>
-                          <input type="text" name="Situacao" required />
+                          <input type="text" name="Situacao" required placeholder="Individual ou Mantido"/>
                     </div>
                 </div>
                 <div class="linha">
@@ -114,11 +114,11 @@ function abrirFormulario(tipo) {
                     </div>
                     <div class="campo">
                         <span>CPF:</span>
-                        <input type="text" name="CPF" />
+                        <input type="text" name="CPF" required/>
                     </div>
                     <div class="campo">
                         <span>CNS:</span>
-                        <input type="text" name="CNS" />
+                        <input type="text" name="CNS" required />
                     </div>
                 </div>
                 <div class="linha">
@@ -148,7 +148,7 @@ function abrirFormulario(tipo) {
                 <div class="linha">
                     <div class="campo">
                         <span>Telefone:</span>
-                        <input type="tel" name="Telefone" />
+                        <input type="tel" name="Telefone"  />
                     </div>
                     <div class="campo">
                         <span>Email:</span>
@@ -164,18 +164,18 @@ function abrirFormulario(tipo) {
                         <input type="text" name="CNES" />
                     </div>
                     <div class="campo">
-                        <span>Nome fantasia do Estabelecimento:</span>
-                        <input type="text" name="Nome fantasia do Estabelecimento" />
+                        <span >Nome fantasia do Estabelecimento:</span>
+                        <input type="text" name="Nome fantasia do Estabelecimento" required/>
                     </div>
                 </div>
                 <div class="linha">
                     <div class="campo">
                         <span>CBO/Especialidade:</span>
-                        <input type="text" name="CBO/Especialidade" />
+                        <input type="text" name="CBO/Especialidade" required/>
                     </div>
                     <div class="campo">
                         <span>Atend.SUS:</span>
-                        <input type="text" name="Atend.SUS" />
+                        <input type="text" name="Atend.SUS" required/>
                     </div>
                     <div class="campo">
                         <span>CH Amb.:</span>
@@ -193,23 +193,22 @@ function abrirFormulario(tipo) {
                 <div class="linha">
                     <div class="campo">
                         <span>Registro no Conselho de Classe:</span>
-                        <input type="text" name="Registro no Conselho de Classe" />
+                        <input type="text" name="Registro no Conselho de Classe" required/>
                     </div>
                     <div class="campo">
                         <span>Órgão Emissor:</span>
-                        <input type="text" name="Órgão Emissor" />
+                        <input type="text" name="Órgão Emissor" required/>
                     </div>
                     <div class="campo">
                         <span>UF Conselho:</span>
-                        <input type="text" name="UF Conselho" maxlength="2" />
-                        <span>UF Conselho:</span>
-                        <input type="text" name="UF Conselho" maxlength="2" />
+                        <input type="text" name="UF Conselho" maxlength="2" required/>
+                        
                     </div>
                 </div>
                 <div class="linha">
                 <div class="campo">
                 <span>Forma de Contratação com o Estabelecimento:</span>
-                <select id="contratacaoEstabelecimento">
+                <select id="contratacaoEstabelecimento" required>
                     <option value="">Selecione</option>
                     <option value="empregaticio">Vinculo Empregaticio</option>
                     <option value="autonomo">Autonomo</option>
@@ -429,8 +428,6 @@ function abrirFormulario(tipo) {
                         <input type="text" name="Órgão Emissor" />
                     </div>
                     <div class="campo">
-                        <span>UF Conselho:</span>
-                        <input type="text" name="UF Conselho" maxlength="2" />
                         <span>UF Conselho:</span>
                         <input type="text" name="UF Conselho" maxlength="2" />
                     </div>
