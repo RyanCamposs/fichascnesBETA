@@ -623,7 +623,10 @@ function abrirFormulario(tipo) {
             let result = document.getElementById("result")    
             let btn = document.getElementById("btn-copy");
             btn.addEventListener('click', function() {
-            navigator.clipboard.writeText(input.value);               
+            navigator.clipboard.writeText(input.value).then(() => {
+                btn.dataset.tooltip = "CBO copiado!";
+                setTimeout(() => btn.dataset.tooltip = "Copiar CBO", 2000)
+            });               
             });
         
             results.appendChild(li);

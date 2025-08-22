@@ -230,6 +230,65 @@ footer {
   text-align: center;
   
 }
+#btn-copy[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+#btn-copy[data-tooltip]::after {
+  content: '';
+  opacity: 0;
+}
+
+#dashboard {
+  margin-top: 2rem;
+}
+
+.dashboard-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dash-card {
+  flex: 1 1 180px;
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.dash-card:hover {
+  transform: translateY(-5px);
+  background-color: var(--card-hover);
+}
+
+.dash-card h3 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.dash-card p {
+  margin: 0.5rem 0 0 0;
+  color: #555;
+}
+
 
 .box-section {
   display: flex;

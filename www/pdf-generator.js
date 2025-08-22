@@ -1,3 +1,6 @@
+let pdfCount = 0;
+let formCount = 0;
+
 async function gerarPDF() {
     try {
         const { jsPDF } = window.jspdf;
@@ -7,13 +10,30 @@ async function gerarPDF() {
             return;
         }
 
+        const form = document.getElementById("formConteudo");
+        if (!form) {
+            alert("Erro: Formulário não encontrado!");
+            return;
+        }
+
+        const formTitle = document.getElementById("formTitle").textContent;
+        let y = 30;
         const doc = new jsPDF();
         const pageWidth = doc.internal.pageSize.getWidth();
         const pageHeight = doc.internal.pageSize.getHeight();
         const margin = 10;
-        let y = 20;
 
-        // Função para adicionar cabeçalho
+        // Coletar dados do formulário
+        const campos = {};
+        const inputs = form.querySelectorAll("input, select, textarea");
+        inputs.forEach((el) => {
+            let label = el.name;
+            const span = el.closest(".campo")?.querySelector("span");
+            if (span) label = span.innerText.replace(":", "").trim();
+            campos[label] = el.value || "-";
+        });
+
+        // Funções auxiliares
         const addHeader = () => {
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(16);
@@ -24,7 +44,6 @@ async function gerarPDF() {
             doc.line(margin, 20, pageWidth - margin, 20);
         };
 
-        // Função para adicionar rodapé
         const addFooter = () => {
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(8);
@@ -32,17 +51,15 @@ async function gerarPDF() {
             doc.text(`Página ${doc.internal.getCurrentPageInfo().pageNumber}`, pageWidth - margin - 10, pageHeight - 10, { align: 'right' });
         };
 
-        // Função para verificar e adicionar nova página
         const checkPageBreak = (requiredHeight) => {
             if (y + requiredHeight > pageHeight) {
                 doc.addPage();
-                y = 20;
+                y = 30;
                 addHeader();
                 addFooter();
             }
         };
 
-        // Função para adicionar tabela de campos
         const addTableSection = (title, fields) => {
             checkPageBreak(30 + fields.length * 10);
             doc.setFont('helvetica', 'bold');
@@ -56,6 +73,7 @@ async function gerarPDF() {
             doc.setFont('times', 'normal');
             doc.setFontSize(10);
             doc.setDrawColor(0, 0, 0);
+
             const tableWidth = pageWidth - 2 * margin;
             const labelWidth = tableWidth * 0.4;
             const valueWidth = tableWidth * 0.6;
@@ -71,7 +89,6 @@ async function gerarPDF() {
             y += 5;
         };
 
-        // Função para adicionar observações
         const addObservations = (text) => {
             checkPageBreak(30 + (text.length > 0 ? 20 : 10));
             doc.setFont('helvetica', 'bold');
@@ -91,26 +108,10 @@ async function gerarPDF() {
             y += obs.length * 6 + 10;
         };
 
-        // Coletar dados do formulário
-        const form = document.getElementById("formConteudo");
-        const campos = {};
-        const inputs = form.querySelectorAll("input, select, textarea");
-        const value = inputs.value
-
-        inputs.forEach((el) => {
-            let label = el.name;
-            const span = el.closest(".campo")?.querySelector("span");
-            if (span) {
-                label = span.innerText.replace(":", "").trim();
-            }
-            const valor = el.value || "-";
-            campos[label] = valor;
-        });
-
-        // Título do PDF
-        const formTitle = document.getElementById("formTitle").textContent;
+        // Adiciona header e footer iniciais
         addHeader();
         addFooter();
+
 
         // Seção: Dados do Profissional ( Ficha 31)
         if (formTitle === "Ficha 31") {
@@ -237,7 +238,9 @@ async function gerarPDF() {
 
         // Salvar o PDF
         const fileName = formTitle === "Ficha de Cliente" ? "ficha-cliente.pdf" : "ficha-servico.pdf";
-
+        pdfCount++;
+        document.getElementById("pdfCount").textContent = pdfCount;
+        document.getElementById("dashboard").classList.remove("hidden");
 try {
     // Se estiver rodando no navegador (sem Cordova)
     if (typeof cordova === "undefined") {
