@@ -147,15 +147,7 @@ async function gerarPDF() {
         
             ]; 
             addTableSection('DADOS DO PROFISSIONAL', establishmentFields);
-        
-                const dadosDaEquipe = [
-                    ['INE da Equipe', campos['INE da Equipe']],
-                    ['Tipificação da Equipe', campos['Tipificação da Equipe']],
-                    ['Pertencente a equipe minima?', campos['Pertencente a equipe minima?']]
-                ]
-                 addTableSection('Dados da Equipe', dadosDaEquipe);
-
-                 addObservations(campos['Observações']);
+            addObservations(campos['Observações']);
 
 
 
