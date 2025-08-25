@@ -436,7 +436,7 @@ li {
   }
 
   .signature canvas {
-    max-width: 300px;
+    max-width: 100%;
   }
 
   .signature button {
