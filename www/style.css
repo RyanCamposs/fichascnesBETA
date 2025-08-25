@@ -411,4 +411,18 @@ li {
   footer {
     max-width:100%;
   }
+  .signature {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .signature canvas {
+    max-width: 325px;
+  }
+
+  .signature button {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 }

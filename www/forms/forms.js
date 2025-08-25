@@ -16,7 +16,7 @@ function abrirFormulario(tipo) {
         document.getElementById("btn-remove").classList.remove("hidden")
         formTitle.textContent = "Ficha 1";
         formConteudo.innerHTML = `
-            <section class="ficha">
+            <section class="ficha" id="fichaSection">
                 <h2>DADOS DO ESTABELECIMENTO - 1</h2>
                 <div class="linha">
                     <div class="campo">
@@ -105,7 +105,7 @@ function abrirFormulario(tipo) {
         document.getElementById("btn-remove").classList.remove("hidden")
         formTitle.textContent = "Ficha 31";
         formConteudo.innerHTML = `
-            <section class="ficha">
+            <section class="ficha" id="fichaSection">
                 <h2>DADOS DO PROFISSIONAL</h2>
                 <div class="linha">
                     <div class="campo">
@@ -325,15 +325,12 @@ function abrirFormulario(tipo) {
             selectDetalhamento.disabled = true;
         }
     });
-    } 
-    
-     
-    // FICHA 32 PROFISSIONAL COM EQUIPE
+    }
     else if (tipo === "ficha32") {
          document.getElementById("btn-copy").classList.add("hidden");
     document.getElementById("btn-remove").classList.remove("hidden");
     formTitle.textContent = "Ficha 32";
-    formConteudo.innerHTML = `<section class="ficha">
+    formConteudo.innerHTML = `<section class="ficha" id="fichaSection">
                 <h2>DADOS DO PROFISSIONAL</h2>
                 <div class="linha">
                     <div class="campo">
@@ -578,13 +575,14 @@ function abrirFormulario(tipo) {
 
         
 
-    }else if (tipo === "listacbo") {
+    }
+    else if (tipo === "listacbo") {
         document.getElementById("btn-remove").classList.add("hidden");
         document.getElementById("btn-copy").classList.remove("hidden");
         document.getElementById("sigSection").classList.add("hidden");
         formTitle.textContent = "Lista de CBO";
         formConteudo.innerHTML = `
-          <section class="ficha">
+          <section class="ficha" id="fichaSection">
              <h2>Procure seu CBO</h2>
         <div class="linha">
             <div class="campo" style="width:100%">
