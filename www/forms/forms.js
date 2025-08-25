@@ -14,7 +14,6 @@ function abrirFormulario(tipo) {
      if (tipo === "ficha1") {
         document.getElementById("btn-copy").classList.add("hidden");
         document.getElementById("btn-remove").classList.remove("hidden");
-        document.getElementById("signaturePrompt").classList.remove("hidden");
         formTitle.textContent = "Ficha 1";
         formConteudo.innerHTML = `
             <section class="ficha" id="fichaSection">
@@ -104,7 +103,6 @@ function abrirFormulario(tipo) {
     else if (tipo === "ficha31") {
         document.getElementById("btn-copy").classList.add("hidden");
         document.getElementById("btn-remove").classList.remove("hidden")
-        document.getElementById("signaturePrompt").classList.remove("hidden")
         formTitle.textContent = "Ficha 31";
         formConteudo.innerHTML = `
             <section class="ficha" id="fichaSection">
@@ -331,8 +329,6 @@ function abrirFormulario(tipo) {
     else if (tipo === "ficha32") {
     document.getElementById("btn-copy").classList.add("hidden");
     document.getElementById("btn-remove").classList.remove("hidden");
-    document.getElementById("signaturePrompt").classList.remove("hidden")
-
     formTitle.textContent = "Ficha 32";
     formConteudo.innerHTML = `<section class="ficha" id="fichaSection">
                 <h2>DADOS DO PROFISSIONAL</h2>
@@ -582,9 +578,7 @@ function abrirFormulario(tipo) {
     }
     else if (tipo === "listacbo") {
         document.getElementById("btn-remove").classList.add("hidden");
-        document.getElementById("btn-copy").classList.remove("hidden");
-        document.getElementById("sigSection").classList.add("hidden");
-        document.getElementById("signaturePrompt").classList.add("hidden");
+        document.getElementById("btn-copy").classList.remove("hidden");      
         formTitle.textContent = "Lista de CBO";
         formConteudo.innerHTML = `
           <section class="ficha" id="fichaSection">
@@ -644,12 +638,12 @@ function abrirFormulario(tipo) {
     }if (tipo === "futuro") {
         document.getElementById("btn-remove").classList.remove("hidden");
         document.getElementById("btn-copy").classList.add("hidden");
-        formTitle.textContent = "Lista de CBO";
+        document.getElementById("btn-copy").classList.add("hidden");
+        document.getElementById("btn-remove").classList.add("hidden");
+        formTitle.textContent = "Preenchimento da Assinatura";
         formConteudo.innerHTML = `
-        <section class="ficha">
-            <h1>Página em construção</h1>
-
-        </section>
+        <p>Ainda não há nada aqui... 🎈 </p>
+        
         `;
         }
         }

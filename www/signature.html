@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+    <h1 onclick="voltarMenu()" style="cursor: pointer;">Formulários do CNES</h1>
+    <button id="themeToggle">🌙</button>
+  </header>
+
+
+
+    <section id="sigSection2">
+        <p style="color: red; text-align: center;">Obs. ao desenhar a sua assinatura, ela ficará salva no navegador, <br>podendo fazer com que você a utilize novamente em outros formulários.</p>
+        <h2 style="text-align: center;">Campo de Assinatura Virtual (opcional)</h2>
+          <div class="signature">     
+              <canvas id="sigCanvas" width="500" height="200" style="border:1px solid #ddd"></canvas>
+              <button id="clearSig">Limpar</button>
+              <button id="saveSig">Salvar assinatura</button>
+                <button style="color: white; margin-top: 100px;"><a href="index.html" style="color: white;">Voltar para o menu principal</a></button>
+          </div>
+      </section>
+      
+
+
+
+    <footer>
+        <div class="footer-box">
+            <p>Precisando de ajuda?
+            <a href="whatsapp://send?text=Estou com duvidas sobre o site!&phone=+556993966203">Clique aqui</a> 
+            para nos enviar uma mensagem no WhatsApp</p>   
+        </div>
+    </footer>
+
+<!-- FOOTER -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <script src="script.js"></script>
+  <script src="cordova.js"></script>
+  <script src="theme.js"></script>
+  <script src="./forms/forms.js"></script>
+  <script src="pdf-generator.js"></script>
+  <script src="./teste/server.js"></script>
+  <script src="./forms/loading.js"></script>
+  <script src="./signature.js"></script>
+     
+    
+</body>
+</html>
