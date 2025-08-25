@@ -222,6 +222,19 @@ textarea:focus {
   flex-wrap: wrap;
 }
 
+.signature {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.signature buttons {
+  margin: 10px;
+}
+
+#clearSig {
+  margin: 10px;
+}
 /* PARTE DO RODAPÉ */
 footer {
    background-color: var(--primary);

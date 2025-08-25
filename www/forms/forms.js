@@ -581,6 +581,7 @@ function abrirFormulario(tipo) {
     }else if (tipo === "listacbo") {
         document.getElementById("btn-remove").classList.add("hidden");
         document.getElementById("btn-copy").classList.remove("hidden");
+        document.getElementById("sigSection").classList.add("hidden");
         formTitle.textContent = "Lista de CBO";
         formConteudo.innerHTML = `
           <section class="ficha">

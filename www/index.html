@@ -56,8 +56,18 @@
         <button class="hidden" id="btn-copy">Copiar CBO</button>
         <div id="result"></div>
       </div>
-    </section>
-  </main>
+
+      <!-- SEÇÃO DA ASSINATURA -->
+       <section id="sigSection">
+        <h2>Campo de Assinatura Virtual (opcional)</h2>
+          <div class="signature">     
+              <canvas id="sigCanvas" width="500" height="200" style="border:1px solid #ddd"></canvas>
+              <button id="clearSig">Limpar</button>
+              <button id="saveSig">Salvar assinatura</button>
+          </div>
+      </section>
+  </section>
+</main>
 
   <section id="dashboard" class="hidden">
   <h2>Dashboard de Uso</h2>
@@ -69,16 +79,17 @@
     <div class="dash-card">
       <h3 id="formCount">0</h3>
       <p>Formulários Preenchidos</p>
+     </div>
     </div>
-  </div>
-</section>
-  </div>
-  <footer>
+  </section>
+</div>
+
+    <footer>
     <div class="footer-box">
-      <p>Precisando de ajuda? <a href="whatsapp://send?text=Estou com duvidas sobre o site!&phone=+556993966203">Clique aqui</a> para nos enviar uma mensagem no WhatsApp</p>
+      <p>Precisando de ajuda? <a href="whatsapp://send?text=Estou com duvidas sobre o site!&phone=+556993966203">Clique aqui</a> para nos enviar uma mensagem no WhatsApp</p>   
     </div>
   </footer>
-
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <script src="script.js"></script>
@@ -88,6 +99,7 @@
   <script src="pdf-generator.js"></script>
   <script src="./teste/server.js"></script>
   <script src="./forms/loading.js"></script>
+  <script src="./signature.js"></script>
 
 </body>
 </html>

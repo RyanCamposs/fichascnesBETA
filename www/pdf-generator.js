@@ -41,7 +41,8 @@ async function gerarPDF() {
             doc.text(formTitle, pageWidth / 2, 15, { align: 'center' });
             doc.setLineWidth(0.5);
             doc.setDrawColor(100, 100, 100);
-            doc.line(margin, 20, pageWidth - margin, 20);
+            doc.line(margin, 20, pageWidth + margin, 20);
+            // doc.line(margin, 20, pageWidth - margin, 2);
         };
 
         const addFooter = () => {
@@ -224,7 +225,7 @@ async function gerarPDF() {
         } 
 
         // Campo de assinatura
-        checkPageBreak(20);
+         checkPageBreak(20);
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(10);
         doc.setTextColor(0, 0, 0);
@@ -233,6 +234,67 @@ async function gerarPDF() {
         doc.setDrawColor(100, 100, 100);
         doc.line(margin, y + 5, pageWidth - margin, y + 5);
         y += 10;
+        
+        const dataUrl = localStorage.getItem('assinatura') || document.getElementById('assinaturaData')?.value;
+
+// garante espaço para assinatura + linhas
+const espaçoNecessario = 60; // ajuste se precisar mais espaço
+checkPageBreak(espaçoNecessario);
+
+// posição inicial para assinatura (corrente do y)
+let assinaturaAltura = 0;
+let assinaturaLargura = 0;
+let assinaturaX = pageWidth - margin - 60; // colocada à direita; ajuste 60 se mudar largura
+
+if (dataUrl) {
+    try {
+        const imgProps = doc.getImageProperties ? doc.getImageProperties(dataUrl) : { width: 200, height: 100 };
+        const w = 80; // largura em mm (ajuste)
+        const h = (imgProps.height / imgProps.width) * w;
+
+        // recalcula posição x caso queira centralizar: assinaturaX = (pageWidth - w) / 2;
+        assinaturaX = pageWidth - margin - w;
+        assinaturaLargura = w;
+        assinaturaAltura = h;
+
+        // desenha a assinatura na posição atual y
+        doc.addImage(dataUrl, 'PNG', assinaturaX, y, w, h);
+
+        // avança o cursor vertical para deixar espaço abaixo da imagem
+        y += h + 6;
+    } catch (err) {
+        console.warn('Erro ao inserir assinatura no PDF:', err);
+    }
+}
+
+// --- Agora desenha o texto + linhas de assinatura alinhadas horizontalmente ---
+checkPageBreak(20);
+doc.setFont('helvetica', 'bold');
+doc.setFontSize(10);
+doc.setTextColor(0, 0, 0);
+
+
+// define uma Y fixa para as linhas (um pouco abaixo do texto)
+const linhaY = y + 8;
+
+// largura das linhas (você pode ajustar)
+const linhaWidth = 80;
+
+// linha esquerda (início próximo da margem)
+doc.setLineWidth(0.5);
+doc.setDrawColor(100, 100, 100);
+doc.line(margin, linhaY, margin + linhaWidth, linhaY);
+doc.setFont('helvetica', 'normal');
+doc.setFontSize(9);
+doc.text('Carimbo', margin, linhaY + 6);
+
+// linha direita (finalizando próxima à margem direita)
+doc.line(pageWidth - margin - linhaWidth, linhaY, pageWidth - margin, linhaY);
+doc.text('Assinatura', pageWidth - margin - linhaWidth, linhaY + 6);
+
+// se a assinatura foi desenhada à direita, ela não atrapalha as linhas
+// avança o cursor
+y = linhaY + 18;
 
         // Salvar o PDF
          pdfCount++;
