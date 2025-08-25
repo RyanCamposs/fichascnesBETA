@@ -57,8 +57,13 @@
         <div id="result"></div>
       </div>
 
+      <div>
+        <p>Você quer assinar pelo site?</p>
+        <button onclick="toggleAssinature()" id="btn-toggle-sig" style="background-color: black;">Clique aqui</button>
+      </div>
+
       <!-- SEÇÃO DA ASSINATURA -->
-       <section id="sigSection">
+       <section id="sigSection" class="hidden">
         <h2>Campo de Assinatura Virtual (opcional)</h2>
           <div class="signature">     
               <canvas id="sigCanvas" width="500" height="200" style="border:1px solid #ddd"></canvas>

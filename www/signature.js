@@ -10,3 +10,9 @@ document.getElementById('saveSig').addEventListener('click', () => {
   localStorage.setItem('assinatura', dataUrl);
   showToast('Assinatura salva', 'success');
 });
+
+ // Evento de toggle da assinatura
+ function toggleAssinature() {
+   const sigSection = document.getElementById('sigSection');
+   sigSection.classList.toggle('hidden');
+ }
