@@ -216,14 +216,22 @@ textarea:focus {
 
 /* Botões do formulário */
 
-#sigCanvas {
+.signature {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 500px;
-  height: 200px;
-  border: 1px solid #000000;
-  display: block;
-  margin: 0 auto;
+  margin: 10px auto; /* centraliza horizontalmente */
 }
+
+#sigCanvas {
+  width: 100%;
+  height: auto; /* deixa proporcional à largura */
+  aspect-ratio: 5 / 2; /* largura / altura = 500px/200px */
+  border: 1px solid #000;
+  display: block;
+}
+
 .form-buttons {
   margin-top: 2rem;
   display: flex;
@@ -231,12 +239,7 @@ textarea:focus {
   flex-wrap: wrap;
 }
 
-.signature {
-  display: flex;
-  width: 500px;
-  flex-direction: column;
-  margin: 10px;
-}
+
 
 .signature buttons {
   margin: 10px;
