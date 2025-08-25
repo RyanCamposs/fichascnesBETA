@@ -413,16 +413,17 @@ li {
     max-width:100%;
   }
   .signature {
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
   }
 
   .signature canvas {
-    max-width: 350px;
+    max-width: 300px;
   }
 
   .signature button {
+    width: 150px;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
   }
