@@ -235,57 +235,97 @@ async function gerarPDF() {
         y += 10;
 
         // Salvar o PDF
-        const fileName = formTitle === "Ficha de Cliente" ? "ficha-cliente.pdf" : "ficha-servico.pdf";
-        pdfCount++;
-        document.getElementById("pdfCount").textContent = pdfCount;
-        document.getElementById("dashboard").classList.remove("hidden");
-try {
-    // Se estiver rodando no navegador (sem Cordova)
-    if (typeof cordova === "undefined") {
-        console.log("Rodando no navegador, usando jsPDF.save()");
-        doc.save(fileName);
-        return;
-    }
+         pdfCount++;
+        if (document.getElementById("pdfCount")) {
+            document.getElementById("pdfCount").textContent = pdfCount;
+        }
+        if (document.getElementById("dashboard")) {
+            document.getElementById("dashboard").classList.remove("hidden");
+        }
 
-    // Se for Cordova Android
-    if (cordova.platformId === "android") {
-        console.log("Iniciando salvamento do PDF no Android");
+        // Salvar o PDF
+        // nome do arquivo com extensão correta
+        const safeTitle = formTitle.replace(/\s+/g, '-').toLowerCase();
+        const fileName = `${safeTitle || 'ficha'}-servico.pdf`;
 
-        const pdfBlob = doc.output("blob");
-        if (pdfBlob.size === 0) {
-            alert("Erro: O PDF gerado está vazio.");
+        // Debug: checar se pdf tem conteúdo
+        try {
+            const pdfBlobCheck = doc.output("blob");
+            console.log("Tamanho do blob gerado:", pdfBlobCheck.size);
+            if (!pdfBlobCheck || pdfBlobCheck.size === 0) {
+                alert("Erro: O PDF gerado está vazio.");
+                return;
+            }
+        } catch (e) {
+            console.warn("Não foi possível verificar o blob do PDF:", e);
+        }
+
+        // Se estiver rodando no navegador (sem Cordova)
+        if (typeof window.cordova === "undefined") {
+            console.log("Rodando no navegador, usando jsPDF.save()");
+            try {
+                doc.save(fileName);
+            } catch (e) {
+                console.error("Erro ao salvar via doc.save():", e);
+                alert("Erro ao salvar PDF no navegador: " + e.toString());
+            }
             return;
         }
 
-        if (!fileSystemDirectory) {
-            alert("Erro: Nenhum diretório disponível. Reinstale o app.");
-            return;
-        }
+        // Se for Cordova Android (tentativa segura)
+        try {
+            const platformId = window.cordova?.platformId || '';
+            const fileSystemDirectory = window.cordova?.file?.dataDirectory || null;
 
-        window.resolveLocalFileSystemURL(fileSystemDirectory, function (dirEntry) {
-            dirEntry.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
-                fileEntry.createWriter(function (writer) {
-                    writer.onwriteend = function () {
-                        alert("PDF salvo com sucesso: " + fileName);
-                        if (cordova.plugins && cordova.plugins.fileOpener2) {
-                            cordova.plugins.fileOpener2.open(
-                                fileEntry.toNativeURL(),
-                                "application/pdf"
-                            );
-                        }
-                    };
-                    writer.onerror = function (error) {
-                        alert("Erro ao salvar PDF: " + error.toString());
-                    };
-                    writer.write(pdfBlob);
+            if (platformId.toLowerCase() === "android") {
+                console.log("Iniciando salvamento do PDF no Android (Cordova)");
+                const pdfBlob = doc.output("blob");
+                if (!pdfBlob || pdfBlob.size === 0) {
+                    alert("Erro: O PDF gerado está vazio.");
+                    return;
+                }
+
+                if (!fileSystemDirectory) {
+                    alert("Erro: Nenhum diretório de arquivo disponível (cordova.file.dataDirectory ausente).");
+                    return;
+                }
+
+                window.resolveLocalFileSystemURL(fileSystemDirectory, function (dirEntry) {
+                    dirEntry.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
+                        fileEntry.createWriter(function (writer) {
+                            writer.onwriteend = function () {
+                                alert("PDF salvo com sucesso: " + fileName);
+                                if (cordova.plugins && cordova.plugins.fileOpener2) {
+                                    cordova.plugins.fileOpener2.open(
+                                        fileEntry.toURL(),
+                                        "application/pdf"
+                                    );
+                                }
+                            };
+                            writer.onerror = function (error) {
+                                alert("Erro ao salvar PDF: " + error.toString());
+                            };
+                            writer.write(pdfBlob);
+                        }, function (err) {
+                            alert("Erro ao criar writer: " + err.toString());
+                        });
+                    }, function (err) {
+                        alert("Erro ao obter/criar arquivo: " + err.toString());
+                    });
+                }, function (err) {
+                    alert("Erro ao acessar o diretório do sistema de arquivos: " + err.toString());
                 });
-            });
-        });
-    } else {
-        alert("Plataforma não suportada para salvamento de PDF.");
+            } else {
+                alert("Plataforma Cordova não suportada para salvamento automático: " + platformId);
+            }
+        } catch (e) {
+            alert("Erro durante salvamento em Cordova: " + e.toString());
+            console.error(e);
+        }
+
+    } catch (error) {
+        // erro geral
+        console.error('Erro na função gerarPDF():', error);
+        alert('Erro na geração do PDF: ' + (error && error.toString ? error.toString() : JSON.stringify(error)));
     }
-} catch (e) {
-    alert("Erro na geração do PDF: " + e.toString());
-}}catch(error) {
-    alert('teste: ' + error.toString());
-}}
+}
