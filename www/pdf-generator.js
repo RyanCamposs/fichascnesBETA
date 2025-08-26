@@ -154,7 +154,62 @@ async function gerarPDF() {
 
 
             // FICHA PROFISSIONAL COM EQUIPE (PDF)
-        } else if (formTitle === "Ficha 32") {
+        }else if (formTitle === "Ficha 33") {
+    // Seção Dados do Profissional
+    const professionalFields = [
+        ['Nome do Profissional', campos['Nome completo']],
+        ['CPF', campos['CPF']],
+        ['CNS', campos['CNS']],
+        ['Telefone', campos['Telefone']],
+        ['Email', campos['Email']]
+    ];
+    addTableSection('DADOS DO PROFISSIONAL', professionalFields);
+
+    // Estabelecimento Cedente
+    const cedenteFields = [
+        ['CNES', campos['CNES1']],
+        ['Nome Fantasia', campos['Nome fantasia do Estabelecimento1']],
+        ['CBO/Especialidade', campos['CBO/Especialidade1']],
+        ['CH Amb.', campos['Amb1']],
+        ['CH Hosp.', campos['Hosp1']],
+        ['CH Outros', campos['Outros1']],
+        ['Registro no Conselho de Classe', campos['Registro no Conselho de Classe1']],
+        ['Órgão Emissor', campos['Órgão Emissor1']],
+        ['UF Conselho', campos['UF Conselho1']],
+        ['Atend.SUS', campos['Atend.SUS1']],
+        ['Forma de Contratação com o Estabelecimento', campos['Forma de Contratação com o Estabelecimento1']],
+        ['Forma de Contratação com o Empregador', campos['Forma de Contratação com o Empregador1']],
+        ['Detalhamento da Forma de Contratação', campos['Detalhamento da Forma de Contratação1']],
+        ['CNPJ', campos['CNPJ1']]
+    ];
+    addTableSection('ESTABELECIMENTO CEDENTE', cedenteFields);
+
+    // Estabelecimento Receptor
+    const receptorFields = [
+        ['CNES', campos['CNES2']],
+        ['Nome Fantasia', campos['Nome fantasia do Estabelecimento2']],
+        ['CBO/Especialidade', campos['CBO/Especialidade2']],
+        ['CH Amb.', campos['Amb2']],
+        ['CH Hosp.', campos['Hosp2']],
+        ['CH Outros', campos['Outros2']],
+        ['Registro no Conselho de Classe', campos['Registro no Conselho de Classe2']],
+        ['Órgão Emissor', campos['Órgão Emissor2']],
+        ['UF Conselho', campos['UF Conselho2']],
+        ['Atend.SUS', campos['Atend.SUS2']],
+        ['Forma de Contratação com o Estabelecimento', campos['Forma de Contratação com o Estabelecimento2']],
+        ['Forma de Contratação com o Empregador', campos['Forma de Contratação com o Empregador2']],
+        ['Detalhamento da Forma de Contratação', campos['Detalhamento da Forma de Contratação2']],
+        ['CNPJ', campos['CNPJ2']]
+    ];
+    addTableSection('ESTABELECIMENTO RECEPTOR', receptorFields);
+
+    // Observações
+    addObservations(campos['Observações']);
+}
+
+
+        
+        else if (formTitle === "Ficha 32") {
             const professionalFields = [
                 ['Nome completo', campos['Nome completo']],
                 ['CPF', campos['CPF']],
@@ -198,7 +253,8 @@ async function gerarPDF() {
 
                  addObservations(campos['Observações']);
 
-        } else if (formTitle === "Ficha 1") {   // FICHA 1 PDF
+        } 
+        else if (formTitle === "Ficha 1") {   // FICHA 1 PDF
             const professionalFields = [
                 ['CNPJ da Empresa', campos['CNPJ da Empresa']],
                 ['CNES da Empresa', campos['CNES da Empresa']],
@@ -295,6 +351,10 @@ doc.text('Assinatura', pageWidth - margin - linhaWidth, linhaY + 6);
 // se a assinatura foi desenhada à direita, ela não atrapalha as linhas
 // avança o cursor
 y = linhaY + 18;
+
+
+
+
 
         // Salvar o PDF
          pdfCount++;

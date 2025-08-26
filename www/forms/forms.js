@@ -576,6 +576,215 @@ function abrirFormulario(tipo) {
         
 
     }
+   else if (tipo === "ficha33") {
+    document.getElementById("btn-remove").classList.remove("hidden");
+    document.getElementById("btn-copy").classList.add("hidden");
+    formTitle.textContent = "Ficha 33";
+    formConteudo.innerHTML = `
+        <section class="ficha" id="fichaSection">
+            <h2>DADOS DO PROFISSIONAL</h2>
+            <div class="linha">
+                <div class="campo">
+                    <span>Nome completo:</span>
+                    <input type="text" name="Nome completo" required />
+                </div>
+                <div class="campo">
+                    <span>CPF:</span>
+                    <input type="text" name="CPF" required/>
+                </div>
+                <div class="campo">
+                    <span>CNS:</span>
+                    <input type="text" name="CNS" required />
+                </div>
+            </div>
+            <div class="linha">
+                <div class="campo">
+                    <span>Telefone:</span>
+                    <input type="tel" name="Telefone" />
+                </div>
+                <div class="campo">
+                    <span>Email:</span>
+                    <input type="email" name="Email" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Estabelecimento Cedente -->
+        <section class="ficha">  
+            <h2>Estabelecimento Cedente</h2>  
+            <div class="linha">
+                <div class="campo">
+                    <span>CNES:</span>
+                    <input type="text" name="CNES Cedente" />
+                </div>
+                <div class="campo">
+                    <span>Nome Fantasia:</span>
+                    <input type="text" name="Nome Fantasia Cedente" required/>
+                </div>
+            </div>
+            <div class="linha">
+                <div class="campo">
+                    <span>CBO/Especialidade:</span>
+                    <input type="text" name="CBO Cedente" required/>
+                </div>
+                <div class="campo">
+                    <span>Atend. SUS:</span>
+                    <input type="text" name="Atend SUS Cedente" required/>
+                </div>
+                <div class="campo">
+                    <span>CH Amb.:</span>
+                    <input type="text" name="CH Amb Cedente" />
+                </div>
+                <div class="campo">
+                    <span>CH Hosp:</span>
+                    <input type="text" name="CH Hosp Cedente" />
+                </div>
+                <div class="campo">
+                    <span>CH Outros:</span>
+                    <input type="text" name="CH Outros Cedente" />
+                </div>
+            </div>
+            <div class="linha">
+                <div class="campo">
+                    <span>Registro no Conselho:</span>
+                    <input type="text" name="Registro Conselho Cedente" required/>
+                </div>
+                <div class="campo">
+                    <span>Órgão Emissor:</span>
+                    <input type="text" name="Órgão Emissor Cedente" required/>
+                </div>
+                <div class="campo">
+                    <span>UF Conselho:</span>
+                    <input type="text" name="UF Conselho Cedente" maxlength="2" required/>
+                </div>
+            </div>
+            <div class="linha">
+                <div class="campo">
+                    <span>Forma de Contratação (Estab.):</span>
+                    <select id="contratacaoEstabelecimentoCedente" name="Contratação Estabelecimento Cedente" required>
+                        <option value="">Selecione</option>
+                        <option value="empregaticio">Vínculo Empregatício</option>
+                        <option value="autonomo">Autônomo</option>
+                        <option value="residencia">Residência</option>
+                        <option value="estagio">Estágio</option>
+                        <option value="bolsa">Bolsa</option>
+                        <option value="intermediado">Intermediado</option>
+                        <option value="informal">Informal</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <span>Forma de Contratação (Empregador):</span>
+                    <select id="contratacaoEmpregadorCedente" name="Contratação Empregador Cedente" disabled>
+                        <option value="">Selecione primeiro o Estabelecimento</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <span>Detalhamento da Contratação:</span>
+                    <select id="detalhamentoContratacaoCedente" name="Detalhamento Cedente" disabled>
+                        <option value="">Selecione primeiro o Empregador</option>
+                    </select>
+                </div>       
+            </div>
+            <div class="linha">
+                <div class="campo">
+                    <span>CNPJ:</span>
+                    <input type="text" name="CNPJ Cedente"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estabelecimento Receptor -->
+        <section class="ficha">  
+            <h2>Estabelecimento Receptor</h2>  
+            <div class="linha">
+                <div class="campo">
+                    <span>CNES:</span>
+                    <input type="text" name="CNES Receptor" />
+                </div>
+                <div class="campo">
+                    <span>Nome Fantasia:</span>
+                    <input type="text" name="Nome Fantasia Receptor" required/>
+                </div>
+            </div>
+            <div class="linha">
+                <div class="campo">
+                    <span>CBO/Especialidade:</span>
+                    <input type="text" name="CBO Receptor" required/>
+                </div>
+                <div class="campo">
+                    <span>Atend. SUS:</span>
+                    <input type="text" name="Atend SUS Receptor" required/>
+                </div>
+                <div class="campo">
+                    <span>CH Amb.:</span>
+                    <input type="text" name="CH Amb Receptor" />
+                </div>
+                <div class="campo">
+                    <span>CH Hosp:</span>
+                    <input type="text" name="CH Hosp Receptor" />
+                </div>
+                <div class="campo">
+                    <span>CH Outros:</span>
+                    <input type="text" name="CH Outros Receptor" />
+                </div>
+            </div>
+            <div class="linha">
+                <div class="campo">
+                    <span>Registro no Conselho:</span>
+                    <input type="text" name="Registro Conselho Receptor" required/>
+                </div>
+                <div class="campo">
+                    <span>Órgão Emissor:</span>
+                    <input type="text" name="Órgão Emissor Receptor" required/>
+                </div>
+                <div class="campo">
+                    <span>UF Conselho:</span>
+                    <input type="text" name="UF Conselho Receptor" maxlength="2" required/>
+                </div>
+            </div>
+            <div class="linha">
+                <div class="campo">
+                    <span>Forma de Contratação (Estab.):</span>
+                    <select id="contratacaoEstabelecimentoReceptor" name="Contratação Estabelecimento Receptor" required>
+                        <option value="">Selecione</option>
+                        <option value="empregaticio">Vínculo Empregatício</option>
+                        <option value="autonomo">Autônomo</option>
+                        <option value="residencia">Residência</option>
+                        <option value="estagio">Estágio</option>
+                        <option value="bolsa">Bolsa</option>
+                        <option value="intermediado">Intermediado</option>
+                        <option value="informal">Informal</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <span>Forma de Contratação (Empregador):</span>
+                    <select id="contratacaoEmpregadorReceptor" name="Contratação Empregador Receptor" disabled>
+                        <option value="">Selecione primeiro o Estabelecimento</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <span>Detalhamento da Contratação:</span>
+                    <select id="detalhamentoContratacaoReceptor" name="Detalhamento Receptor" disabled>
+                        <option value="">Selecione primeiro o Empregador</option>
+                    </select>
+                </div>       
+            </div>
+            <div class="linha">
+                <div class="campo">
+                    <span>CNPJ:</span>
+                    <input type="text" name="CNPJ Receptor"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- Observações -->
+        <section class="ficha">
+            <h2>OBSERVAÇÕES</h2>
+            <textarea name="Observações" rows="4" style="width:100%"></textarea>
+        </section>
+    `;
+}
+
     else if (tipo === "listacbo") {
         document.getElementById("btn-remove").classList.add("hidden");
         document.getElementById("btn-copy").classList.remove("hidden");      
