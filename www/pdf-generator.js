@@ -33,27 +33,35 @@ async function gerarPDF() {
             campos[label] = el.value || "-";
         });
 
-        // Funções auxiliares
+        // ====================
+        // FUNÇÕES AUXILIARES
+        // ====================
+
         const addHeader = () => {
+            doc.setFillColor(240, 248, 255); // fundo azul clarinho
+            doc.rect(0, 0, pageWidth, 20, 'F');
+
             doc.setFont('helvetica', 'bold');
-            doc.setFontSize(16);
-            doc.setTextColor(0, 0, 0);
-            doc.text(formTitle, pageWidth / 2, 15, { align: 'center' });
-            doc.setLineWidth(0.5);
-            doc.setDrawColor(100, 100, 100);
-            doc.line(margin, 20, pageWidth + margin, 20);
-            // doc.line(margin, 20, pageWidth - margin, 2);
+            doc.setFontSize(14);
+            doc.setTextColor(0, 60, 120);
+            doc.text(formTitle, pageWidth / 2, 13, { align: 'center' });
+
+            doc.setDrawColor(180, 180, 180);
+            doc.line(margin, 20, pageWidth - margin, 20);
         };
 
         const addFooter = () => {
-            doc.setFont('helvetica', 'normal');
+            doc.setDrawColor(200, 200, 200);
+            doc.line(margin, pageHeight - 15, pageWidth - margin, pageHeight - 15);
+
+            doc.setFont('helvetica', 'italic');
             doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text(`Página ${doc.internal.getCurrentPageInfo().pageNumber}`, pageWidth - margin - 10, pageHeight - 10, { align: 'right' });
+            doc.setTextColor(120, 120, 120);
+            doc.text(`Página ${doc.internal.getCurrentPageInfo().pageNumber}`, pageWidth - margin, pageHeight - 8, { align: 'right' });
         };
 
         const checkPageBreak = (requiredHeight) => {
-            if (y + requiredHeight > pageHeight) {
+            if (y + requiredHeight > pageHeight - 20) {
                 doc.addPage();
                 y = 30;
                 addHeader();
@@ -63,57 +71,76 @@ async function gerarPDF() {
 
         const addTableSection = (title, fields) => {
             checkPageBreak(30 + fields.length * 10);
+
+            // Título da seção
+            doc.setFillColor(230, 240, 255); // azul suave
+            doc.setDrawColor(180, 180, 180);
+            doc.rect(margin, y, pageWidth - 2 * margin, 8, 'FD');
+
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(12);
-            doc.setFillColor(0, 200, 200);
-            doc.rect(margin, y, pageWidth - 2 * margin, 8, 'F');
-            doc.setTextColor(0, 0, 0);
+            doc.setTextColor(0, 70, 140);
             doc.text(title, margin + 2, y + 6);
-            y += 10;
+            y += 12;
 
+            // Campos
             doc.setFont('times', 'normal');
-            doc.setFontSize(10);
-            doc.setDrawColor(0, 0, 0);
-
+            doc.setFontSize(8);
             const tableWidth = pageWidth - 2 * margin;
             const labelWidth = tableWidth * 0.4;
             const valueWidth = tableWidth * 0.6;
 
-            fields.forEach(([label, value]) => {
+            fields.forEach(([label, value], index) => {
                 checkPageBreak(10);
+
+                // Zebra
+                if (index % 2 === 0) {
+                    doc.setFillColor(245, 245, 245);
+                    doc.rect(margin, y, tableWidth, 8, 'F');
+                }
+
+                doc.setDrawColor(200, 200, 200);
                 doc.rect(margin, y, labelWidth, 8);
                 doc.rect(margin + labelWidth, y, valueWidth, 8);
-                doc.text(label, margin + 2, y + 6);
-                doc.text(value?.toString() || '-', margin + labelWidth + 2, y + 6);
-                y += 8;
+
+                doc.setTextColor(0, 0, 0);
+                doc.text(label, margin + 2, y + 5);
+                doc.setFont('helvetica', 'normal');
+                doc.text(value?.toString() || '-', margin + labelWidth + 2, y + 5);
+
+                y += 6;
             });
-            y += 5;
+            y += 4;
         };
 
         const addObservations = (text) => {
             checkPageBreak(30 + (text.length > 0 ? 20 : 10));
+
+            doc.setFillColor(230, 240, 255);
+            doc.setDrawColor(180, 180, 180);
+            doc.rect(margin, y, pageWidth - 2 * margin, 8, 'FD');
+
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(12);
-            doc.setFillColor(0, 200, 200);
-            doc.rect(margin, y, pageWidth - 2 * margin, 8, 'F');
-            doc.setTextColor(0, 0, 0);
+            doc.setTextColor(0, 70, 140);
             doc.text('OBSERVAÇÕES', margin + 2, y + 6);
-            y += 10;
+            y += 12;
 
             doc.setFont('times', 'normal');
             doc.setFontSize(10);
-            doc.setDrawColor(100, 100, 100);
             const obs = doc.splitTextToSize(text || '-', pageWidth - 2 * margin - 4);
+            doc.setDrawColor(200, 200, 200);
             doc.rect(margin, y, pageWidth - 2 * margin, obs.length * 6 + 4);
             doc.text(obs, margin + 2, y + 6);
             y += obs.length * 6 + 10;
         };
 
-        // Adiciona header e footer iniciais
+        // ====================
+        // CONSTRUÇÃO DO PDF
+        // ====================
         addHeader();
         addFooter();
-
-
+        
         // Seção: Dados do Profissional ( Ficha 31)
         if (formTitle === "Ficha 31") {
             const professionalFields = [
@@ -157,7 +184,7 @@ async function gerarPDF() {
         }else if (formTitle === "Ficha 33") {
     // Seção Dados do Profissional
     const professionalFields = [
-        ['Nome do Profissional', campos['Nome completo']],
+        ['Nome completo', campos['Nome completo']],
         ['CPF', campos['CPF']],
         ['CNS', campos['CNS']],
         ['Telefone', campos['Telefone']],
@@ -167,39 +194,39 @@ async function gerarPDF() {
 
     // Estabelecimento Cedente
     const cedenteFields = [
-        ['CNES', campos['CNES1']],
-        ['Nome Fantasia', campos['Nome fantasia do Estabelecimento1']],
-        ['CBO/Especialidade', campos['CBO/Especialidade1']],
-        ['CH Amb.', campos['Amb1']],
-        ['CH Hosp.', campos['Hosp1']],
-        ['CH Outros', campos['Outros1']],
-        ['Registro no Conselho de Classe', campos['Registro no Conselho de Classe1']],
-        ['Órgão Emissor', campos['Órgão Emissor1']],
-        ['UF Conselho', campos['UF Conselho1']],
-        ['Atend.SUS', campos['Atend.SUS1']],
-        ['Forma de Contratação com o Estabelecimento', campos['Forma de Contratação com o Estabelecimento1']],
-        ['Forma de Contratação com o Empregador', campos['Forma de Contratação com o Empregador1']],
-        ['Detalhamento da Forma de Contratação', campos['Detalhamento da Forma de Contratação1']],
-        ['CNPJ', campos['CNPJ1']]
+        ['CNES Cedente', campos['CNES Cedente']],
+        ['Nome Fantasia do Cedente', campos['Nome fantasia do Cedente']],
+        ['CBO do Profissional Cedido', campos['CBO do Profissional Cedido']],
+        ['CH Amb', campos['CH Amb']],
+        ['CH Hosp', campos['CH Hosp']],
+        ['CH Outros', campos['CH Outros']],
+        ['Registro no Conselho Profissional Cedido', campos['Registro no Conselho Profissional Cedido']],
+        ['Órgão Emissor Cedente', campos['Órgão Emissor Cedente']],
+        ['UF Conselho Cedente', campos['UF Conselho Cedente']],
+        ['Atend SUS', campos['Atend SUS']],
+        ['Contratação Estabelecimento Cedente', campos['Contratação Estabelecimento Cedente']],
+        ['Contratação Empregador Cedente', campos['Contratação Empregador Cedente']],
+        ['Detalhamento Cedente', campos['Detalhamento Cedente']],
+        ['CNPJ Cedente', campos['CNPJ Cedente']]
     ];
     addTableSection('ESTABELECIMENTO CEDENTE', cedenteFields);
 
     // Estabelecimento Receptor
     const receptorFields = [
-        ['CNES', campos['CNES2']],
-        ['Nome Fantasia', campos['Nome fantasia do Estabelecimento2']],
-        ['CBO/Especialidade', campos['CBO/Especialidade2']],
-        ['CH Amb.', campos['Amb2']],
-        ['CH Hosp.', campos['Hosp2']],
-        ['CH Outros', campos['Outros2']],
-        ['Registro no Conselho de Classe', campos['Registro no Conselho de Classe2']],
-        ['Órgão Emissor', campos['Órgão Emissor2']],
-        ['UF Conselho', campos['UF Conselho2']],
-        ['Atend.SUS', campos['Atend.SUS2']],
-        ['Forma de Contratação com o Estabelecimento', campos['Forma de Contratação com o Estabelecimento2']],
-        ['Forma de Contratação com o Empregador', campos['Forma de Contratação com o Empregador2']],
-        ['Detalhamento da Forma de Contratação', campos['Detalhamento da Forma de Contratação2']],
-        ['CNPJ', campos['CNPJ2']]
+        ['CNES Receptor', campos['CNES Receptor']],
+        ['Nome Fantasia do Receptor', campos['Nome Fantasia do Receptor']],
+        ['CBO Receptor', campos['CBO Receptor']],
+        ['CH Amb Receptor', campos['CH Amb Receptor']],
+        ['CH Hosp Receptor', campos['CH Hosp Receptor']],
+        ['CH Outros Receptor', campos['CH Outros Receptor']],
+        ['Registro no Conselho Receptor', campos['Registro no Conselho Receptor']],
+        ['Órgão Emissor Receptor', campos['Órgão Emissor Receptor']],
+        ['UF Conselho Receptor', campos['UF Conselho Receptor']],
+        ['Atend SUS Receptor', campos['Atend SUS Receptor']],
+        ['Forma de Contratação Estabelecimento Receptor', campos['Forma de Contratação Estabelecimento Receptor']],
+        ['Forma de Contratação Empregador Receptor', campos['Forma de Contratação Empregador Receptor']],
+        ['Detalhamento da Contratação Receptor', campos['Detalhamento da Contratação Receptor']],
+        ['CNPJ Receptor', campos['CNPJ Receptor']]
     ];
     addTableSection('ESTABELECIMENTO RECEPTOR', receptorFields);
 
@@ -279,85 +306,42 @@ async function gerarPDF() {
             ];
             addTableSection('DADOS DO ESTABELECIMENTO', establishmentFields);
         } 
-
-        // Campo de assinatura
-         checkPageBreak(20);
+checkPageBreak(40);
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(10);
-        doc.setTextColor(0, 0, 0);
-        doc.text('Assinatura e Carimbo do(a) Responsável:', margin, y);
+        doc.text('Assinatura do(a) Profissional/Responsável:', margin, y);
+        y += 10;
+
+        const dataUrl = localStorage.getItem('assinatura') || document.getElementById('assinaturaData')?.value;
+        if (dataUrl) {
+            try {
+                const w = 60;
+                const h = 30;
+                doc.addImage(dataUrl, 'PNG', pageWidth - margin - w, y, w, h);
+                y += h + 6;
+            } catch (err) {
+                console.warn('Erro ao inserir assinatura:', err);
+            }
+        }
+
+        const linhaY = y + 8;
+        const linhaWidth = 80;
+
         doc.setLineWidth(0.5);
         doc.setDrawColor(100, 100, 100);
-        doc.line(margin, y + 5, pageWidth - margin, y + 5);
-        y += 10;
-        
-        const dataUrl = localStorage.getItem('assinatura') || document.getElementById('assinaturaData')?.value;
+        doc.line(margin, linhaY, margin + linhaWidth, linhaY);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.text('Assinatura do Profissional', margin, linhaY + 6);
 
-// garante espaço para assinatura + linhas
-const espaçoNecessario = 60; // ajuste se precisar mais espaço
-checkPageBreak(espaçoNecessario);
+        doc.line(pageWidth - margin - linhaWidth, linhaY, pageWidth - margin, linhaY);
+        doc.text('Assinatura do Responsável', pageWidth - margin - linhaWidth, linhaY + 6);
+        y = linhaY + 18;
 
-// posição inicial para assinatura (corrente do y)
-let assinaturaAltura = 0;
-let assinaturaLargura = 0;
-let assinaturaX = pageWidth - margin - 60; // colocada à direita; ajuste 60 se mudar largura
-
-if (dataUrl) {
-    try {
-        const imgProps = doc.getImageProperties ? doc.getImageProperties(dataUrl) : { width: 200, height: 100 };
-        const w = 80; // largura em mm (ajuste)
-        const h = (imgProps.height / imgProps.width) * w;
-
-        // recalcula posição x caso queira centralizar: assinaturaX = (pageWidth - w) / 2;
-        assinaturaX = pageWidth - margin - w;
-        assinaturaLargura = w;
-        assinaturaAltura = h;
-
-        // desenha a assinatura na posição atual y
-        doc.addImage(dataUrl, 'PNG', assinaturaX, y, w, h);
-
-        // avança o cursor vertical para deixar espaço abaixo da imagem
-        y += h + 6;
-    } catch (err) {
-        console.warn('Erro ao inserir assinatura no PDF:', err);
-    }
-}
-
-// --- Agora desenha o texto + linhas de assinatura alinhadas horizontalmente ---
-checkPageBreak(20);
-doc.setFont('helvetica', 'bold');
-doc.setFontSize(10);
-doc.setTextColor(0, 0, 0);
-
-
-// define uma Y fixa para as linhas (um pouco abaixo do texto)
-const linhaY = y + 8;
-
-// largura das linhas (você pode ajustar)
-const linhaWidth = 80;
-
-// linha esquerda (início próximo da margem)
-doc.setLineWidth(0.5);
-doc.setDrawColor(100, 100, 100);
-doc.line(margin, linhaY, margin + linhaWidth, linhaY);
-doc.setFont('helvetica', 'normal');
-doc.setFontSize(9);
-doc.text('Carimbo', margin, linhaY + 6);
-
-// linha direita (finalizando próxima à margem direita)
-doc.line(pageWidth - margin - linhaWidth, linhaY, pageWidth - margin, linhaY);
-doc.text('Assinatura', pageWidth - margin - linhaWidth, linhaY + 6);
-
-// se a assinatura foi desenhada à direita, ela não atrapalha as linhas
-// avança o cursor
-y = linhaY + 18;
-
-
-
-
-
-        // Salvar o PDF
-         pdfCount++;
+        // ====================
+        // SALVAR PDF
+        // ====================
+        pdfCount++;
         if (document.getElementById("pdfCount")) {
             document.getElementById("pdfCount").textContent = pdfCount;
         }
@@ -365,88 +349,12 @@ y = linhaY + 18;
             document.getElementById("dashboard").classList.remove("hidden");
         }
 
-        // Salvar o PDF
-        // nome do arquivo com extensão correta
         const safeTitle = formTitle.replace(/\s+/g, '-').toLowerCase();
         const fileName = `${safeTitle || 'ficha'}-servico.pdf`;
 
-        // Debug: checar se pdf tem conteúdo
-        try {
-            const pdfBlobCheck = doc.output("blob");
-            console.log("Tamanho do blob gerado:", pdfBlobCheck.size);
-            if (!pdfBlobCheck || pdfBlobCheck.size === 0) {
-                alert("Erro: O PDF gerado está vazio.");
-                return;
-            }
-        } catch (e) {
-            console.warn("Não foi possível verificar o blob do PDF:", e);
-        }
-
-        // Se estiver rodando no navegador (sem Cordova)
-        if (typeof window.cordova === "undefined") {
-            console.log("Rodando no navegador, usando jsPDF.save()");
-            try {
-                doc.save(fileName);
-            } catch (e) {
-                console.error("Erro ao salvar via doc.save():", e);
-                alert("Erro ao salvar PDF no navegador: " + e.toString());
-            }
-            return;
-        }
-
-        // Se for Cordova Android (tentativa segura)
-        try {
-            const platformId = window.cordova?.platformId || '';
-            const fileSystemDirectory = window.cordova?.file?.dataDirectory || null;
-
-            if (platformId.toLowerCase() === "android") {
-                console.log("Iniciando salvamento do PDF no Android (Cordova)");
-                const pdfBlob = doc.output("blob");
-                if (!pdfBlob || pdfBlob.size === 0) {
-                    alert("Erro: O PDF gerado está vazio.");
-                    return;
-                }
-
-                if (!fileSystemDirectory) {
-                    alert("Erro: Nenhum diretório de arquivo disponível (cordova.file.dataDirectory ausente).");
-                    return;
-                }
-
-                window.resolveLocalFileSystemURL(fileSystemDirectory, function (dirEntry) {
-                    dirEntry.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
-                        fileEntry.createWriter(function (writer) {
-                            writer.onwriteend = function () {
-                                alert("PDF salvo com sucesso: " + fileName);
-                                if (cordova.plugins && cordova.plugins.fileOpener2) {
-                                    cordova.plugins.fileOpener2.open(
-                                        fileEntry.toURL(),
-                                        "application/pdf"
-                                    );
-                                }
-                            };
-                            writer.onerror = function (error) {
-                                alert("Erro ao salvar PDF: " + error.toString());
-                            };
-                            writer.write(pdfBlob);
-                        }, function (err) {
-                            alert("Erro ao criar writer: " + err.toString());
-                        });
-                    }, function (err) {
-                        alert("Erro ao obter/criar arquivo: " + err.toString());
-                    });
-                }, function (err) {
-                    alert("Erro ao acessar o diretório do sistema de arquivos: " + err.toString());
-                });
-            } else {
-                alert("Plataforma Cordova não suportada para salvamento automático: " + platformId);
-            }
-        } catch (e) {
-            alert("Erro durante salvamento em Cordova: " + e.toString());
-            console.error(e);
-        }
+        doc.save(fileName);
 
     } catch (error) {
-        // erro geral
         console.error('Erro na função gerarPDF():', error);
         alert('Erro na geração do PDF: ' + (error && error.toString ? error.toString() : JSON.stringify(error)));
     }

@@ -614,40 +614,40 @@ function abrirFormulario(tipo) {
             <h2>Estabelecimento Cedente</h2>  
             <div class="linha">
                 <div class="campo">
-                    <span>CNES:</span>
+                    <span>CNES Cedente:</span>
                     <input type="text" name="CNES Cedente" />
                 </div>
                 <div class="campo">
-                    <span>Nome Fantasia:</span>
+                    <span>Nome Fantasia Cedente:</span>
                     <input type="text" name="Nome Fantasia Cedente" required/>
                 </div>
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>CBO/Especialidade:</span>
-                    <input type="text" name="CBO Cedente" required/>
+                    <span>CBO do Profissional Cedido:</span>
+                    <input type="text" name="CBO do Profissional Cedido" required/>
                 </div>
                 <div class="campo">
-                    <span>Atend. SUS:</span>
-                    <input type="text" name="Atend SUS Cedente" required/>
+                    <span>Atend SUS:</span>
+                    <input type="text" name="Atend SUS" required/>
                 </div>
                 <div class="campo">
-                    <span>CH Amb.:</span>
-                    <input type="text" name="CH Amb Cedente" />
+                    <span>CH Amb</span>
+                    <input type="text" name="CH Amb" />
                 </div>
                 <div class="campo">
                     <span>CH Hosp:</span>
-                    <input type="text" name="CH Hosp Cedente" />
+                    <input type="text" name="CH Hosp" />
                 </div>
                 <div class="campo">
                     <span>CH Outros:</span>
-                    <input type="text" name="CH Outros Cedente" />
+                    <input type="text" name="CH Outros" />
                 </div>
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>Registro no Conselho:</span>
-                    <input type="text" name="Registro Conselho Cedente" required/>
+                    <span>Registro no Conselho Profissional Cedido</span>
+                    <input type="text" name="Registro no Conselho Profissional Cedido" required/>
                 </div>
                 <div class="campo">
                     <span>Órgão Emissor:</span>
@@ -698,54 +698,54 @@ function abrirFormulario(tipo) {
             <h2>Estabelecimento Receptor</h2>  
             <div class="linha">
                 <div class="campo">
-                    <span>CNES:</span>
+                    <span>CNES Receptor:</span>
                     <input type="text" name="CNES Receptor" />
                 </div>
                 <div class="campo">
-                    <span>Nome Fantasia:</span>
-                    <input type="text" name="Nome Fantasia Receptor" required/>
+                    <span>Nome Fantasia do Receptor:</span>
+                    <input type="text" name="Nome Fantasia do Receptor" required/>
                 </div>
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>CBO/Especialidade:</span>
+                    <span>CBO Receptor:</span>
                     <input type="text" name="CBO Receptor" required/>
                 </div>
                 <div class="campo">
-                    <span>Atend. SUS:</span>
+                    <span>Atend SUS Receptor:</span>
                     <input type="text" name="Atend SUS Receptor" required/>
                 </div>
                 <div class="campo">
-                    <span>CH Amb.:</span>
+                    <span>CH Amb Receptor:</span>
                     <input type="text" name="CH Amb Receptor" />
                 </div>
                 <div class="campo">
-                    <span>CH Hosp:</span>
+                    <span>CH Hosp Receptor:</span>
                     <input type="text" name="CH Hosp Receptor" />
                 </div>
                 <div class="campo">
-                    <span>CH Outros:</span>
+                    <span>CH Outros Receptor:</span>
                     <input type="text" name="CH Outros Receptor" />
                 </div>
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>Registro no Conselho:</span>
-                    <input type="text" name="Registro Conselho Receptor" required/>
+                    <span>Registro no Conselho Receptor:</span>
+                    <input type="text" name="Registro no Conselho Receptor" required/>
                 </div>
                 <div class="campo">
-                    <span>Órgão Emissor:</span>
+                    <span>Órgão Emissor Receptor:</span>
                     <input type="text" name="Órgão Emissor Receptor" required/>
                 </div>
                 <div class="campo">
-                    <span>UF Conselho:</span>
+                    <span>UF Conselho Receptor:</span>
                     <input type="text" name="UF Conselho Receptor" maxlength="2" required/>
                 </div>
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>Forma de Contratação (Estab.):</span>
-                    <select id="contratacaoEstabelecimentoReceptor" name="Contratação Estabelecimento Receptor" required>
+                    <span>Forma de Contratação Estabelecimento Receptor:</span>
+                    <select id="contratacaoEstabelecimentoReceptor" name="Forma de Contratação Estabelecimento Receptor" required>
                         <option value="">Selecione</option>
                         <option value="empregaticio">Vínculo Empregatício</option>
                         <option value="autonomo">Autônomo</option>
@@ -757,21 +757,21 @@ function abrirFormulario(tipo) {
                     </select>
                 </div>
                 <div class="campo">
-                    <span>Forma de Contratação (Empregador):</span>
-                    <select id="contratacaoEmpregadorReceptor" name="Contratação Empregador Receptor" disabled>
+                    <span>Forma de Contratação Empregador Receptor:</span>
+                    <select id="contratacaoEmpregadorReceptor" name="Forma de Contratação Empregador Receptor" disabled>
                         <option value="">Selecione primeiro o Estabelecimento</option>
                     </select>
                 </div>
                 <div class="campo">
-                    <span>Detalhamento da Contratação:</span>
-                    <select id="detalhamentoContratacaoReceptor" name="Detalhamento Receptor" disabled>
+                    <span>Detalhamento da Contratação Receptor:</span>
+                    <select id="detalhamentoContratacaoReceptor" name="Detalhamento da Contratação Receptor" disabled>
                         <option value="">Selecione primeiro o Empregador</option>
                     </select>
                 </div>       
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>CNPJ:</span>
+                    <span>CNPJ Receptor:</span>
                     <input type="text" name="CNPJ Receptor"/>
                 </div>
             </div>
@@ -783,6 +783,85 @@ function abrirFormulario(tipo) {
             <textarea name="Observações" rows="4" style="width:100%"></textarea>
         </section>
     `;
+    
+        const dataContratacao = {
+        empregaticio: {
+            "Estatuario Efetivo": ["Servidor Próprio", "Servidor Cedido"],
+            "Empregado Publico Celetista": ["Próprio", "Cedido"],
+            "Contratado Temporário ou por prazo/tempo determinado": ["Público", "Privado"],
+            "Cargo Comissionado": ["Servidor Publico Próprio", "Servidor Publico Cedido", "Sem vinculo com o setor Publico"],
+            "Celetista": ["Não se aplica"]
+        },
+        autonomo: {
+            "Pessoa Juridica": ["Não se aplica"],
+            "Pessoa Fisica": ["Não se aplica"],
+            "Cooperado": ["Não se aplica"]
+        },
+        residencia: {
+            "Residente": ["Próprio", "Subsidiado por outro Ente/Entidade"]
+        },
+        estagio: {
+            "Estagiario": ["Próprio", "Subsidiado por outro Ente/Entidade"]
+        },
+        bolsa: {
+            "Bolsista":["Próprio", "Subsidiado por outro Ente/Entidade"]
+        },
+        intermediado: {
+            "Empregado Publico Celetista": ["Não se aplica"],
+            "Contratado temporário ou por prazo/tempo determinado": ["Não se aplica"],
+            "Cargo Comissionado":["Não se aplica"],
+            "Celetista": ["Não se aplica"],
+            "Autonomo": ["Pessoa Juridica", "Pessoa Fisica"],
+            "Cooperado": ["Não se aplica"]
+        },
+        informal: {
+            "Contratado verbalmente": ["Não se aplica"],
+            "Voluntariado": ["Não se aplica"]
+        }
+    };
+
+    const selectEstabelecimento = document.getElementById("contratacaoEstabelecimentoReceptor");
+    const selectEmpregador = document.getElementById("contratacaoEmpregadorReceptor");
+    const selectDetalhamento = document.getElementById("detalhamentoContratacaoReceptor");
+
+    // Primeiro select
+    selectEstabelecimento.addEventListener("change", function() {
+        const valor = this.value;
+        selectEmpregador.innerHTML = '<option value="">Selecione</option>';
+        selectDetalhamento.innerHTML = '<option value="">Selecione primeiro o Empregador</option>';
+        selectDetalhamento.disabled = true;
+
+        if (valor && dataContratacao[valor]) {
+            Object.keys(dataContratacao[valor]).forEach(key => {
+                const opt = document.createElement("option");
+                opt.value = key;
+                opt.textContent = key;
+                selectEmpregador.appendChild(opt);
+            });
+            selectEmpregador.disabled = false;
+        } else {
+            selectEmpregador.disabled = true;
+        }
+    });
+
+    // Segundo select
+    selectEmpregador.addEventListener("change", function() {
+        const valor1 = selectEstabelecimento.value;
+        const valor2 = this.value;
+
+        selectDetalhamento.innerHTML = '<option value="">Selecione</option>';
+        if (valor1 && valor2 && dataContratacao[valor1][valor2]) {
+            dataContratacao[valor1][valor2].forEach(item => {
+                const opt = document.createElement("option");
+                opt.value = item;
+                opt.textContent = item;
+                selectDetalhamento.appendChild(opt);
+            });
+            selectDetalhamento.disabled = false;
+        } else {
+            selectDetalhamento.disabled = true;
+        }
+    });
 }
 
     else if (tipo === "listacbo") {
