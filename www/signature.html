@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario do CNES - Assinatura</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 </head>
 <body>
     <div id="loading-screen">
@@ -15,19 +16,37 @@
     <h1 onclick="voltarMenu()" style="cursor: pointer;">Formulários do CNES</h1>
     <button id="themeToggle">🌙</button>
   </header>
+  <button style="color: white; margin-top: 100px;width: 200px" href="index.html"><a href="index.html" style="color: white;">Voltar para o menu principal</a></button>
+  <main>
+    <h2>Assinatura do Responsável</h2>
+    <button onclick="assinarResponsavel()">Assinar</button>
+
+    <h2>Assinatura do Profissional</h2>
+    <button onclick="assinarProfissional()">Assinar</button>
+  </main>
+
+  
 
 
 
-    <section id="sigSection2">
-        <p style="color: red; text-align: center;">Obs. ao desenhar a sua assinatura, ela ficará salva no navegador, <br>podendo fazer com que você a utilize novamente em outros formulários.</p>
-        <h2 style="text-align: center;">Campo de Assinatura Virtual (opcional)</h2>
-          <div class="signature">     
-              <canvas id="sigCanvas" width="500" height="200" style="border:1px solid #ddd"></canvas>
-              <button id="clearSig">Limpar</button>
-              <button id="saveSig">Salvar assinatura</button>
-                <button style="color: white; margin-top: 100px;" href="index.html"><a href="index.html" style="color: white;">Voltar para o menu principal</a></button>
-          </div>
-      </section>
+    <section id="sigSection2" class="hidden">
+  <h2 style="text-align: center;">Campo de Assinatura Virtual (Responsável)</h2>
+  <div class="signature">     
+    <canvas id="sigCanvasResponsavel" width="500" height="200" style="border:1px solid #ddd"></canvas>
+    <button id="clearSigResponsavel">Limpar</button>
+    <button id="saveSigResponsavel">Salvar assinatura</button>
+  </div>
+</section>
+
+<section id="sigSection3" class="hidden">
+  <h2 style="text-align: center;">Campo de Assinatura Virtual (Profissional)</h2>
+  <div class="signature">     
+    <canvas id="sigCanvasProfissional" width="500" height="200" style="border:1px solid #ddd"></canvas>
+    <button id="clearSigProfissional">Limpar</button>
+    <button id="saveSigProfissional">Salvar assinatura</button>
+  </div>
+</section>
+
       
 
 

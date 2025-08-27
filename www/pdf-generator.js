@@ -305,38 +305,29 @@ async function gerarPDF() {
                 ['Órgão Expedidor', campos['Órgão Expedidor']],
             ];
             addTableSection('DADOS DO ESTABELECIMENTO', establishmentFields);
+            
         } 
-checkPageBreak(40);
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(10);
-        doc.text('Assinatura do(a) Profissional/Responsável:', margin, y);
-        y += 10;
+// Recupera assinaturas do localStorage
+const assinaturaResp = localStorage.getItem('assinaturaResponsavel');
+const assinaturaProf = localStorage.getItem('assinaturaProfissional');
 
-        const dataUrl = localStorage.getItem('assinatura') || document.getElementById('assinaturaData')?.value;
-        if (dataUrl) {
-            try {
-                const w = 60;
-                const h = 30;
-                doc.addImage(dataUrl, 'PNG', pageWidth - margin - w, y, w, h);
-                y += h + 6;
-            } catch (err) {
-                console.warn('Erro ao inserir assinatura:', err);
-            }
-        }
+// Espaço para assinaturas
+checkPageBreak(60);
+doc.setFont('helvetica', 'bold');
+doc.setFontSize(9);
+doc.text('Assinatura do Responsável:', margin, y);
+doc.text('Assinatura do Profissional:', pageWidth/2 + margin, y);
 
-        const linhaY = y + 8;
-        const linhaWidth = 80;
+// Inserir imagens (se existirem)
+if (assinaturaResp) {
+  doc.addImage(assinaturaResp, 'PNG', margin, y + 5, 80, 40);
+}
+if (assinaturaProf) {
+  doc.addImage(assinaturaProf, 'PNG', pageWidth/2 + margin, y + 5, 80, 40);
+}
 
-        doc.setLineWidth(0.5);
-        doc.setDrawColor(100, 100, 100);
-        doc.line(margin, linhaY, margin + linhaWidth, linhaY);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.text('Assinatura do Profissional', margin, linhaY + 6);
+y += 75; // avança espaço
 
-        doc.line(pageWidth - margin - linhaWidth, linhaY, pageWidth - margin, linhaY);
-        doc.text('Assinatura do Responsável', pageWidth - margin - linhaWidth, linhaY + 6);
-        y = linhaY + 18;
 
         // ====================
         // SALVAR PDF

@@ -1,33 +1,51 @@
-const canvas = document.getElementById('sigCanvas');
-const sigPad = new SignaturePad(canvas, { backgroundColor: 'rgba(255,255,255,0)' });
+// Canvases e SignaturePads
+const canvasResp = document.getElementById('sigCanvasResponsavel');
+const canvasProf = document.getElementById('sigCanvasProfissional');
 
-document.getElementById('clearSig').addEventListener('click', () => sigPad.clear());
+const sigPadResp = new SignaturePad(canvasResp, { backgroundColor: 'rgba(255,255,255,0)' });
+const sigPadProf = new SignaturePad(canvasProf, { backgroundColor: 'rgba(255,255,255,0)' });
 
-document.getElementById('saveSig').addEventListener('click', () => {
-  if (sigPad.isEmpty()) return showToast('Assine primeiro', 'error');
-  const dataUrl = sigPad.toDataURL('image/png'); // base64 PNG
-  // Armazene onde quiser: campo hidden, localStorage ou inserir direto no jsPDF
-  localStorage.setItem('assinatura', dataUrl);
-  showToast('Assinatura salva', 'success');
+// Botões Responsável
+document.getElementById('clearSigResponsavel').addEventListener('click', () => sigPadResp.clear());
+document.getElementById('saveSigResponsavel').addEventListener('click', () => {
+  if (sigPadResp.isEmpty()) return alert('Assine primeiro!');
+  const dataUrl = sigPadResp.toDataURL('image/png');
+  localStorage.setItem('assinaturaResponsavel', dataUrl);
+  alert('Assinatura do Responsável salva!');
 });
 
-function resizeCanvas() {
-  const ratio = Math.max(window.devicePixelRatio || 1, 1);
+// Botões Profissional
+document.getElementById('clearSigProfissional').addEventListener('click', () => sigPadProf.clear());
+document.getElementById('saveSigProfissional').addEventListener('click', () => {
+  if (sigPadProf.isEmpty()) return alert('Assine primeiro!');
+  const dataUrl = sigPadProf.toDataURL('image/png');
+  localStorage.setItem('assinaturaProfissional', dataUrl);
+  alert('Assinatura do Profissional salva!');
+});
 
-  // Salva desenho atual
-  let data = signaturePad && !signaturePad.isEmpty() ? signaturePad.toData() : null;
 
-  // Ajusta largura/altura real do canvas
-  canvas.width = canvas.offsetWidth * ratio;
-  canvas.height = canvas.offsetWidth * 0.4 * ratio; // mantém proporção 500/200 = 0.4
-  canvas.getContext("2d").scale(ratio, ratio);
+ function assinarResponsavel () {
+   const sigSection = document.getElementById('sigSection2');
+   const sigSectionOther = document.getElementById('sigSection3')
+    if (sigSectionOther.classList.contains("hidden")) {
+        sigSection.classList.toggle('hidden');
+   } else {
+        sigSectionOther.classList.toggle('hidden');
+        sigSection.classList.toggle('hidden');
+   }
+ }
 
-  // Restaura desenho
-  if (data) signaturePad.fromData(data);
-}
+ function assinarProfissional () {
+   const sigSection = document.getElementById('sigSection3');
+   const sigSectionOther = document.getElementById('sigSection2')
+   ;
 
- // Evento de toggle da assinatura
- function toggleAssinature() {
-   const sigSection = document.getElementById('sigSection');
-   sigSection.classList.toggle('hidden');
+   if (sigSectionOther.classList.contains("hidden")) {
+        sigSection.classList.toggle('hidden');
+   } else {
+        sigSectionOther.classList.toggle('hidden');
+        sigSection.classList.toggle('hidden');
+   }
+
+  
  }
