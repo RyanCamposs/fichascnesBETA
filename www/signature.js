@@ -8,7 +8,6 @@ const sigPadProf = new SignaturePad(canvasProf, { backgroundColor: 'rgba(255,255
 // Botões Responsável
 document.getElementById('clearSigResponsavel').addEventListener('click', () => sigPadResp.clear());
 document.getElementById('saveSigResponsavel').addEventListener('click', () => {
-  if (sigPadResp.isEmpty()) return alert('Assine primeiro!');
   const dataUrl = sigPadResp.toDataURL('image/png');
   localStorage.setItem('assinaturaResponsavel', dataUrl);
   alert('Assinatura do Responsável salva!');
@@ -17,12 +16,15 @@ document.getElementById('saveSigResponsavel').addEventListener('click', () => {
 // Botões Profissional
 document.getElementById('clearSigProfissional').addEventListener('click', () => sigPadProf.clear());
 document.getElementById('saveSigProfissional').addEventListener('click', () => {
-  if (sigPadProf.isEmpty()) return alert('Assine primeiro!');
   const dataUrl = sigPadProf.toDataURL('image/png');
   localStorage.setItem('assinaturaProfissional', dataUrl);
   alert('Assinatura do Profissional salva!');
 });
 
+if (sigPadResp.isEmpty() || sigPadProf.isEmpty()) {
+    localStorage.setItem('assinaturaResponsavel', dataUrl);
+    alert('Assinatura do Responsável salva!');
+  }
 
  function assinarResponsavel () {
    const sigSection = document.getElementById('sigSection2');

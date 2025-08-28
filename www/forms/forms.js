@@ -660,8 +660,8 @@ function abrirFormulario(tipo) {
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>Forma de Contratação (Estab.):</span>
-                    <select id="contratacaoEstabelecimentoCedente" name="Contratação Estabelecimento Cedente" required>
+                    <span>Forma de Contratação :</span>
+                    <select id="contratacaoEstabelecimentoCedente" name="Forma de Contratação Estabelecimento Cedente" required>
                         <option value="">Selecione</option>
                         <option value="empregaticio">Vínculo Empregatício</option>
                         <option value="autonomo">Autônomo</option>
@@ -747,7 +747,7 @@ function abrirFormulario(tipo) {
                     <span>Forma de Contratação Estabelecimento Receptor:</span>
                     <select id="contratacaoEstabelecimentoReceptor" name="Forma de Contratação Estabelecimento Receptor" required>
                         <option value="">Selecione</option>
-                        <option value="empregaticio">Vínculo Empregatício</option>
+                        <option value="01 - empregaticio">01 - Vínculo Empregatício</option>
                         <option value="autonomo">Autônomo</option>
                         <option value="residencia">Residência</option>
                         <option value="estagio">Estágio</option>
@@ -783,9 +783,8 @@ function abrirFormulario(tipo) {
             <textarea name="Observações" rows="4" style="width:100%"></textarea>
         </section>
     `;
-    
         const dataContratacao = {
-        empregaticio: {
+        "01 - empregaticio": {
             "Estatuario Efetivo": ["Servidor Próprio", "Servidor Cedido"],
             "Empregado Publico Celetista": ["Próprio", "Cedido"],
             "Contratado Temporário ou por prazo/tempo determinado": ["Público", "Privado"],
@@ -860,6 +859,49 @@ function abrirFormulario(tipo) {
             selectDetalhamento.disabled = false;
         } else {
             selectDetalhamento.disabled = true;
+        }
+    });
+
+    const selectEstabelecimentoCedente = document.getElementById("contratacaoEstabelecimentoCedente");
+    const selectEmpregadorCedente = document.getElementById("contratacaoEmpregadorCedente");
+    const selectDetalhamentoCedente = document.getElementById("detalhamentoContratacaoCedente");
+
+    // Primeiro select
+    selectEstabelecimentoCedente.addEventListener("change", function() {
+        const valor = this.value;
+        selectEmpregadorCedente.innerHTML = '<option value="">Selecione</option>';
+        selectDetalhamentoCedente.innerHTML = '<option value="">Selecione primeiro o Empregador</option>';
+        selectDetalhamentoCedente.disabled = true;
+
+        if (valor && dataContratacao[valor]) {
+            Object.keys(dataContratacao[valor]).forEach(key => {
+                const opt = document.createElement("option");
+                opt.value = key;
+                opt.textContent = key;
+                selectEmpregadorCedente.appendChild(opt);
+            });
+            selectEmpregadorCedente.disabled = false;
+        } else {
+            selectEmpregadorCedente.disabled = true;
+        }
+    });
+
+    // Segundo select
+    selectEmpregadorCedente.addEventListener("change", function() {
+        const valor1 = selectEstabelecimentoCedente.value;
+        const valor2 = this.value;
+
+        selectDetalhamentoCedente.innerHTML = '<option value="">Selecione</option>';
+        if (valor1 && valor2 && dataContratacao[valor1][valor2]) {
+            dataContratacao[valor1][valor2].forEach(item => {
+                const opt = document.createElement("option");
+                opt.value = item;
+                opt.textContent = item;
+                selectDetalhamentoCedente.appendChild(opt);
+            });
+            selectDetalhamentoCedente.disabled = false;
+        } else {
+            selectDetalhamentoCedente.disabled = true;
         }
     });
 }
