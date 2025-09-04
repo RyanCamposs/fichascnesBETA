@@ -64,18 +64,19 @@ async function gerarPDF() {
             doc.setTextColor(120, 120, 120);
             doc.text(`Página ${doc.internal.getCurrentPageInfo().pageNumber}`, pageWidth - margin, pageHeight - 8, { align: 'right' });
         };
+        
 
         const checkPageBreak = (requiredHeight) => {
             if (y + requiredHeight > pageHeight - 20) {
                 doc.addPage();
-                y = 30;
-                addHeader();
+                y = 40;
+                // addHeader();
                 addFooter();
             }
         };
 
         const addTableSection = (title, fields) => {
-            checkPageBreak(30 + fields.length * 10);
+            checkPageBreak(10 + fields.length * 10);
 
             // Título da seção
             doc.setFillColor(230, 240, 255); // azul suave
@@ -146,7 +147,7 @@ async function gerarPDF() {
         addFooter();
         
         // Seção: Dados do Profissional ( Ficha 31)
-        if (formTitle === "Ficha 31") {
+        if (formTitle === "Ficha 31 - Profissional") {
             const professionalFields = [
                 ['Nome completo', toUpperBR(campos['Nome completo'])],
                 ['CPF', toUpperBR(campos['CPF'])],
@@ -316,7 +317,7 @@ const assinaturaResp = localStorage.getItem('assinaturaResponsavel');
 const assinaturaProf = localStorage.getItem('assinaturaProfissional');
 
 // Espaço para assinaturas
-checkPageBreak(60);
+checkPageBreak(20);
 doc.setFont('helvetica', 'bold');
 doc.setFontSize(9);
 doc.text('Assinatura do Responsável:', margin, y);

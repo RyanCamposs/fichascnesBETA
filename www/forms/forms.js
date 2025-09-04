@@ -99,12 +99,36 @@ function abrirFormulario(tipo) {
                     </div>
                   </section>`
     
-    }  
-    else if (tipo === "ficha31") {
+    } else if (tipo === "ficha31") {
         document.getElementById("btn-copy").classList.add("hidden");
         document.getElementById("btn-remove").classList.remove("hidden")
-        formTitle.textContent = "Ficha 31";
+        formTitle.textContent = "Ficha 31 - Profissional";
         formConteudo.innerHTML = `
+            <section class="ficha" id="fichaSelectProfile">
+            <h2>Selecione um perfil pré-preenchido</h2>
+            <div class="linha">
+            
+                <select name="unidade" id="unidadeSelect" style="padding: 10px"> 
+                    <option value="">Selecione uma unidade</option>
+                    <option value="01">UBS Albert Sabin</option>
+                    <option value="02">UBS Beira Rio</option>
+                    <option value="03">UBS Boa Esperanca Policlinica</option>
+                    <option value="04">UBS Eni Correia da Silva Nova Estrela</option>
+                    <option value="05">UBS Jardim Tropical</option>
+                    <option value="06">UBS Jose Ferreira Martins Planalto</option>
+                    <option value="07">UBS Maria de Lurdes Ferreira Rocha Cidade Alta</option>
+                    <option value="08">Unidade de Pronto Atendimento Dra Luci Emiko Kitamura</option>
+                    <option value="09">Unidade de Saude Albert Sabin Ref Hanseniase</option>
+            </select>
+
+                <select name="perfil" id="perfilSelect">
+                    <option value="">Selecione um perfil</option>
+                    <option value="01">Perfil 1 - Pessoa Juridica</option>
+                    <option value="02">Perfil 2 - Celetista</option>
+                    <option value="03">Perfil 3 - Residente</option>
+                </select>
+            </div>
+            </section>
             <section class="ficha" id="fichaSection">
                 <h2>DADOS DO PROFISSIONAL</h2>
                 <div class="linha">
@@ -247,41 +271,7 @@ function abrirFormulario(tipo) {
             </section>
         `;
 
-        const dataContratacao = {
-        empregaticio: {
-            "Estatuario Efetivo": ["Servidor Próprio", "Servidor Cedido"],
-            "Empregado Publico Celetista": ["Próprio", "Cedido"],
-            "Contratado Temporário ou por prazo/tempo determinado": ["Público", "Privado"],
-            "Cargo Comissionado": ["Servidor Publico Próprio", "Servidor Publico Cedido", "Sem vinculo com o setor Publico"],
-            "Celetista": ["Não se aplica"]
-        },
-        autonomo: {
-            "Pessoa Juridica": ["Não se aplica"],
-            "Pessoa Fisica": ["Não se aplica"],
-            "Cooperado": ["Não se aplica"]
-        },
-        residencia: {
-            "Residente": ["Próprio", "Subsidiado por outro Ente/Entidade"]
-        },
-        estagio: {
-            "Estagiario": ["Próprio", "Subsidiado por outro Ente/Entidade"]
-        },
-        bolsa: {
-            "Bolsista":["Próprio", "Subsidiado por outro Ente/Entidade"]
-        },
-        intermediado: {
-            "Empregado Publico Celetista": ["Não se aplica"],
-            "Contratado temporário ou por prazo/tempo determinado": ["Não se aplica"],
-            "Cargo Comissionado":["Não se aplica"],
-            "Celetista": ["Não se aplica"],
-            "Autonomo": ["Pessoa Juridica", "Pessoa Fisica"],
-            "Cooperado": ["Não se aplica"]
-        },
-        informal: {
-            "Contratado verbalmente": ["Não se aplica"],
-            "Voluntariado": ["Não se aplica"]
-        }
-    };
+        
 
     const selectEstabelecimento = document.getElementById("contratacaoEstabelecimento");
     const selectEmpregador = document.getElementById("contratacaoEmpregador");
@@ -325,12 +315,95 @@ function abrirFormulario(tipo) {
             selectDetalhamento.disabled = true;
         }
     });
+    // Objetos com dados de cada perfil
+
+
+// Função para preencher formulário
+document.getElementById("perfilSelect").addEventListener("change", function() {
+    const perfilSelecionado = this.value;
+    if (perfisPrePreenchidos[perfilSelecionado]) {
+        const dados = perfisPrePreenchidos[perfilSelecionado];
+
+        // Preencher campos de input
+        Object.keys(dados).forEach(chave => {
+            const campo = document.querySelector(`[name="${chave}"]`);
+            if (campo) {
+                campo.value = dados[chave];
+            }
+        });
+
+        // Preencher selects específicos
+        document.getElementById("contratacaoEstabelecimento").value = dados.contratacaoEstabelecimento;
+        document.getElementById("contratacaoEstabelecimento").dispatchEvent(new Event('change'));
+
+        setTimeout(() => {
+            document.getElementById("contratacaoEmpregador").value = dados.contratacaoEmpregador;
+            document.getElementById("contratacaoEmpregador").dispatchEvent(new Event('change'));
+        }, 50);
+
+        setTimeout(() => {
+            document.getElementById("detalhamentoContratacao").value = dados.detalhamentoContratacao;
+        }, 100);
     }
-    else if (tipo === "ficha32") {
+});
+
+
+document.getElementById("unidadeSelect").addEventListener("change", function() {
+    const unidadelSelecionada = this.value;
+    if (unidadesPrePreenchidas[unidadelSelecionada]) {
+        const dados = unidadesPrePreenchidas[unidadelSelecionada];
+
+        // Preencher campos de input
+        Object.keys(dados).forEach(chave => {
+            const campo = document.querySelector(`[name="${chave}"]`);
+            if (campo) {
+                campo.value = dados[chave];
+            }
+        });
+
+        // Preencher selects específicos
+        document.getElementById("contratacaoEstabelecimento").value = dados.contratacaoEstabelecimento;
+        document.getElementById("contratacaoEstabelecimento").dispatchEvent(new Event('change'));
+
+        setTimeout(() => {
+            document.getElementById("contratacaoEmpregador").value = dados.contratacaoEmpregador;
+            document.getElementById("contratacaoEmpregador").dispatchEvent(new Event('change'));
+        }, 50);
+
+        setTimeout(() => {
+            document.getElementById("detalhamentoContratacao").value = dados.detalhamentoContratacao;
+        }, 100);
+    }
+});
+    } else if (tipo === "ficha32") {
     document.getElementById("btn-copy").classList.add("hidden");
     document.getElementById("btn-remove").classList.remove("hidden");
     formTitle.textContent = "Ficha 32";
     formConteudo.innerHTML = `<section class="ficha" id="fichaSection">
+    <section class="ficha" id="fichaSelectProfile">
+            <h2>Selecione um perfil pré-preenchido</h2>
+            <div class="linha">
+                <select name="perfil" id="perfilSelect">
+                    <option value="">Selecione um perfil</option>
+                    <option value="01">Perfil 1 - Pessoa Juridica</option>
+                    <option value="02">Perfil 2 - Vinculo Empregaticio</option>
+                    <option value="03">Perfil 3 - Residente</option>
+                </select>
+
+                <select name="unidade" id="unidadeSelect" style="padding: 10px"> 
+                    <option value="">Selecione uma unidade</option>
+                    <option value="01">UBS Albert Sabin</option>
+                    <option value="02">UBS Beira Rio</option>
+                    <option value="03">UBS Boa Esperanca Policlinica</option>
+                    <option value="04">UBS Eni Correia da Silva Nova Estrela</option>
+                    <option value="05">UBS Jardim Tropical</option>
+                    <option value="06">UBS Jose Ferreira Martins Planalto</option>
+                    <option value="07">UBS Maria de Lurdes Ferreira Rocha Cidade Alta</option>
+                    <option value="08">Unidade de Pronto Atendimento Dra Luci Emiko Kitamura</option>
+                    <option value="09">Unidade de Saude Albert Sabin Ref Hanseniase</option>
+            </select>
+            </div>
+            </section>
                 <h2>DADOS DO PROFISSIONAL</h2>
                 <div class="linha">
                     <div class="campo">
@@ -492,42 +565,6 @@ function abrirFormulario(tipo) {
             </section> 
             `;
 
-    // --- Depois que o HTML foi inserido no DOM, acessamos os selects ---
-    const dataContratacao = {
-        empregaticio: {
-            "Estatuario Efetivo": ["Servidor Próprio", "Servidor Cedido"],
-            "Empregado Publico Celetista": ["Próprio", "Cedido"],
-            "Contratado Temporário ou por prazo/tempo determinado": ["Público", "Privado"],
-            "Cargo Comissionado": ["Servidor Publico Próprio", "Servidor Publico Cedido", "Sem vinculo com o setor Publico"],
-            "Celetista": ["Não se aplica"]
-        },
-        autonomo: {
-            "Pessoa Juridica": ["Não se aplica"],
-            "Pessoa Fisica": ["Não se aplica"],
-            "Cooperado": ["Não se aplica"]
-        },
-        residencia: {
-            "Residente": ["Próprio", "Subsidiado por outro Ente/Entidade"]
-        },
-        estagio: {
-            "Estagiario": ["Próprio", "Subsidiado por outro Ente/Entidade"]
-        },
-        bolsa: {
-            "Bolsista":["Próprio", "Subsidiado por outro Ente/Entidade"]
-        },
-        intermediado: {
-            "Empregado Publico Celetista": ["Não se aplica"],
-            "Contratado temporário ou por prazo/tempo determinado": ["Não se aplica"],
-            "Cargo Comissionado":["Não se aplica"],
-            "Celetista": ["Não se aplica"],
-            "Autonomo": ["Pessoa Juridica", "Pessoa Fisica"],
-            "Cooperado": ["Não se aplica"]
-        },
-        informal: {
-            "Contratado verbalmente": ["Não se aplica"],
-            "Voluntariado": ["Não se aplica"]
-        }
-    };
 
     const selectEstabelecimento = document.getElementById("contratacaoEstabelecimento");
     const selectEmpregador = document.getElementById("contratacaoEmpregador");
@@ -572,15 +609,81 @@ function abrirFormulario(tipo) {
         }
     });
        
+    document.getElementById("perfilSelect").addEventListener("change", function() {
+    const perfilSelecionado = this.value;
+    if (perfisPrePreenchidos[perfilSelecionado]) {
+        const dados = perfisPrePreenchidos[perfilSelecionado];
+
+        // Preencher campos de input
+        Object.keys(dados).forEach(chave => {
+            const campo = document.querySelector(`[name="${chave}"]`);
+            if (campo) {
+                campo.value = dados[chave];
+            }
+        });
+
+        // Preencher selects específicos
+        document.getElementById("contratacaoEstabelecimento").value = dados.contratacaoEstabelecimento;
+        document.getElementById("contratacaoEstabelecimento").dispatchEvent(new Event('change'));
+
+        setTimeout(() => {
+            document.getElementById("contratacaoEmpregador").value = dados.contratacaoEmpregador;
+            document.getElementById("contratacaoEmpregador").dispatchEvent(new Event('change'));
+        }, 50);
+
+        setTimeout(() => {
+            document.getElementById("detalhamentoContratacao").value = dados.detalhamentoContratacao;
+        }, 100);
+    }
+});
+
+
+document.getElementById("unidadeSelect").addEventListener("change", function() {
+    const unidadelSelecionada = this.value;
+    if (unidadesPrePreenchidas[unidadelSelecionada]) {
+        const dados = unidadesPrePreenchidas[unidadelSelecionada];
+
+        // Preencher campos de input
+        Object.keys(dados).forEach(chave => {
+            const campo = document.querySelector(`[name="${chave}"]`);
+            if (campo) {
+                campo.value = dados[chave];
+            }
+        });
+
+        // Preencher selects específicos
+        document.getElementById("contratacaoEstabelecimento").value = dados.contratacaoEstabelecimento;
+        document.getElementById("contratacaoEstabelecimento").dispatchEvent(new Event('change'));
+
+        setTimeout(() => {
+            document.getElementById("contratacaoEmpregador").value = dados.contratacaoEmpregador;
+            document.getElementById("contratacaoEmpregador").dispatchEvent(new Event('change'));
+        }, 50);
+
+        setTimeout(() => {
+            document.getElementById("detalhamentoContratacao").value = dados.detalhamentoContratacao;
+        }, 100);
+    }
+});
 
         
 
-    }
-   else if (tipo === "ficha33") {
+    } else if (tipo === "ficha33") {
     document.getElementById("btn-remove").classList.remove("hidden");
     document.getElementById("btn-copy").classList.add("hidden");
     formTitle.textContent = "Ficha 33";
     formConteudo.innerHTML = `
+    <section class="ficha" id="fichaSelectProfile">
+            <h2>Selecione um perfil pré-preenchido</h2>
+            <div class="linha">
+                <select name="perfil" id="perfilSelect" style="padding: 10px">
+                    <option value="">Selecione um perfil</option>
+                    <option value="01">Perfil 1 - Pessoa Juridica</option>
+                    <option value="02">Perfil 2 - Vinculo Empregaticio</option>
+                    <option value="03">Perfil 3 - Residente</option>
+                </select>
+            </div>
+            </section>
         <section class="ficha" id="fichaSection">
             <h2>DADOS DO PROFISSIONAL</h2>
             <div class="linha">
@@ -783,42 +886,7 @@ function abrirFormulario(tipo) {
             <textarea name="Observações" rows="4" style="width:100%"></textarea>
         </section>
     `;
-        const dataContratacao = {
-        "01 - empregaticio": {
-            "Estatuario Efetivo": ["Servidor Próprio", "Servidor Cedido"],
-            "Empregado Publico Celetista": ["Próprio", "Cedido"],
-            "Contratado Temporário ou por prazo/tempo determinado": ["Público", "Privado"],
-            "Cargo Comissionado": ["Servidor Publico Próprio", "Servidor Publico Cedido", "Sem vinculo com o setor Publico"],
-            "Celetista": ["Não se aplica"]
-        },
-        autonomo: {
-            "Pessoa Juridica": ["Não se aplica"],
-            "Pessoa Fisica": ["Não se aplica"],
-            "Cooperado": ["Não se aplica"]
-        },
-        residencia: {
-            "Residente": ["Próprio", "Subsidiado por outro Ente/Entidade"]
-        },
-        estagio: {
-            "Estagiario": ["Próprio", "Subsidiado por outro Ente/Entidade"]
-        },
-        bolsa: {
-            "Bolsista":["Próprio", "Subsidiado por outro Ente/Entidade"]
-        },
-        intermediado: {
-            "Empregado Publico Celetista": ["Não se aplica"],
-            "Contratado temporário ou por prazo/tempo determinado": ["Não se aplica"],
-            "Cargo Comissionado":["Não se aplica"],
-            "Celetista": ["Não se aplica"],
-            "Autonomo": ["Pessoa Juridica", "Pessoa Fisica"],
-            "Cooperado": ["Não se aplica"]
-        },
-        informal: {
-            "Contratado verbalmente": ["Não se aplica"],
-            "Voluntariado": ["Não se aplica"]
-        }
-    };
-
+       
     const selectEstabelecimento = document.getElementById("contratacaoEstabelecimentoReceptor");
     const selectEmpregador = document.getElementById("contratacaoEmpregadorReceptor");
     const selectDetalhamento = document.getElementById("detalhamentoContratacaoReceptor");
@@ -904,9 +972,63 @@ function abrirFormulario(tipo) {
             selectDetalhamentoCedente.disabled = true;
         }
     });
-}
+    document.getElementById("perfilSelect").addEventListener("change", function() {
+    const perfilSelecionado = this.value;
+    if (perfisPrePreenchidos[perfilSelecionado]) {
+        const dados = perfisPrePreenchidos[perfilSelecionado];
 
-    else if (tipo === "listacbo") {
+        // Preencher campos de input
+        Object.keys(dados).forEach(chave => {
+            const campo = document.querySelector(`[name="${chave}"]`);
+            if (campo) {
+                campo.value = dados[chave];
+            }
+        });
+
+        // Preencher selects específicos
+        document.getElementById("contratacaoEstabelecimento").value = dados.contratacaoEstabelecimento;
+        document.getElementById("contratacaoEstabelecimento").dispatchEvent(new Event('change'));
+
+        setTimeout(() => {
+            document.getElementById("contratacaoEmpregador").value = dados.contratacaoEmpregador;
+            document.getElementById("contratacaoEmpregador").dispatchEvent(new Event('change'));
+        }, 50);
+
+        setTimeout(() => {
+            document.getElementById("detalhamentoContratacao").value = dados.detalhamentoContratacao;
+        }, 100);
+    }
+});
+
+
+document.getElementById("unidadeSelect").addEventListener("change", function() {
+    const unidadelSelecionada = this.value;
+    if (unidadesPrePreenchidas[unidadelSelecionada]) {
+        const dados = unidadesPrePreenchidas[unidadelSelecionada];
+
+        // Preencher campos de input
+        Object.keys(dados).forEach(chave => {
+            const campo = document.querySelector(`[name="${chave}"]`);
+            if (campo) {
+                campo.value = dados[chave];
+            }
+        });
+
+        // Preencher selects específicos
+        document.getElementById("contratacaoEstabelecimento").value = dados.contratacaoEstabelecimento;
+        document.getElementById("contratacaoEstabelecimento").dispatchEvent(new Event('change'));
+
+        setTimeout(() => {
+            document.getElementById("contratacaoEmpregador").value = dados.contratacaoEmpregador;
+            document.getElementById("contratacaoEmpregador").dispatchEvent(new Event('change'));
+        }, 50);
+
+        setTimeout(() => {
+            document.getElementById("detalhamentoContratacao").value = dados.detalhamentoContratacao;
+        }, 100);
+    }
+});
+    } else if (tipo === "listacbo") {
         document.getElementById("btn-remove").classList.add("hidden");
         document.getElementById("btn-copy").classList.remove("hidden");      
         formTitle.textContent = "Lista de CBO";
@@ -965,7 +1087,7 @@ function abrirFormulario(tipo) {
         console.error('Erro ao carregar lista de CBO', err);
         formConteudo.innerHTML += `<p style="color:red">Não foi possível carregar a lista de CBO.</p>`;
         });
-    }if (tipo === "futuro") {
+    } else if (tipo === "futuro") {
         document.getElementById("btn-remove").classList.remove("hidden");
         document.getElementById("btn-copy").classList.add("hidden");
         document.getElementById("btn-copy").classList.add("hidden");
@@ -975,5 +1097,5 @@ function abrirFormulario(tipo) {
         <p>Ainda não há nada aqui... 🎈 </p>
         
         `;
-        }
-        }
+}
+}
