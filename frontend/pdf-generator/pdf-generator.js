@@ -186,7 +186,7 @@ async function gerarPDF() {
 
 
             // FICHA PROFISSIONAL COM EQUIPE (PDF)
-        }else if (formTitle === "Ficha 33") {
+        } else if (formTitle === "Ficha 33") {
     // Seção Dados do Profissional
     const professionalFields = [
         ['Nome completo', toUpperBR(campos['Nome completo'])],
@@ -237,11 +237,64 @@ async function gerarPDF() {
 
     // Observações
     addObservations(campos['Observações']);
-}
+        } else if (formTitle === "Ficha 34") {
+    // Seção Dados do Profissional
+    const professionalFields = [
+        ['Nome completo', toUpperBR(campos['Nome completo'])],
+        ['CPF', toUpperBR(campos['CPF'])],
+        ['CNS', toUpperBR(campos['CNS'])],
+        ['Telefone', toUpperBR(campos['Telefone'])],
+        ['Email', campos['Email']]
+    ];
+    addTableSection('DADOS DO PROFISSIONAL', professionalFields);
 
+    // Estabelecimento Cedente
+    const cedenteFields = [
+        ['CNES Cedente', toUpperBR(campos['CNES Cedente'])],
+        ['Nome Fantasia do Cedente', toUpperBR(campos['Nome fantasia do Cedente'])],
+        ['CBO do Profissional Cedido', toUpperBR(campos['CBO do Profissional Cedido'])],
+        ['CH Amb', toUpperBR(campos['CH Amb'])],
+        ['CH Hosp', toUpperBR(campos['CH Hosp'])],
+        ['CH Outros', toUpperBR(campos['CH Outros'])],
+        ['Registro no Conselho Profissional Cedido', toUpperBR(campos['Registro no Conselho Profissional Cedido'])],
+        ['Órgão Emissor Cedente', toUpperBR(campos['Órgão Emissor Cedente'])],
+        ['UF Conselho Cedente', toUpperBR(campos['UF Conselho Cedente'])],
+        ['Atend SUS', toUpperBR(campos['Atend SUS'])],
+        ['Contratação Estabelecimento Cedente', toUpperBR(campos['Contratação Estabelecimento Cedente'])],
+        ['Contratação Empregador Cedente', toUpperBR(campos['Contratação Empregador Cedente'])],
+        ['Detalhamento Cedente', toUpperBR(campos['Detalhamento Cedente'])],
+        ['CNPJ Cedente', toUpperBR(campos['CNPJ Cedente'])]
+    ];
+    addTableSection('ESTABELECIMENTO CEDENTE', cedenteFields);
 
-        
-        else if (formTitle === "Ficha 32") {
+    // Estabelecimento Receptor
+    const receptorFields = [
+        ['CNES Receptor', toUpperBR(campos['CNES Receptor'])],
+        ['Nome Fantasia do Receptor', toUpperBR(campos['Nome Fantasia do Receptor'])],
+        ['CBO Receptor', toUpperBR(campos['CBO Receptor'])],
+        ['CH Amb Receptor', toUpperBR(campos['CH Amb Receptor'])],
+        ['CH Hosp Receptor', toUpperBR(campos['CH Hosp Receptor'])],
+        ['CH Outros Receptor', toUpperBR(campos['CH Outros Receptor'])],
+        ['Registro no Conselho Receptor', toUpperBR(campos['Registro no Conselho Receptor'])],
+        ['Órgão Emissor Receptor', toUpperBR(campos['Órgão Emissor Receptor'])],
+        ['UF Conselho Receptor', toUpperBR(campos['UF Conselho Receptor'])],
+        ['Atend SUS Receptor', toUpperBR(['Atend SUS Receptor'])],
+        ['Forma de Contratação Estabelecimento Receptor', toUpperBR(campos['Forma de Contratação Estabelecimento Receptor'])],
+        ['Forma de Contratação Empregador Receptor', toUpperBR(campos['Forma de Contratação Empregador Receptor'])],
+        ['Detalhamento da Contratação Receptor', toUpperBR(campos['Detalhamento da Contratação Receptor'])],
+        ['CNPJ Receptor', toUpperBR(campos['CNPJ Receptor'])]
+    ];
+    addTableSection('ESTABELECIMENTO RECEPTOR', receptorFields);
+    const dadosDaEquipe = [
+                    ['INE da Equipe', toUpperBR(campos['INE da Equipe'])],
+                    ['Tipificação da Equipe', toUpperBR(campos['Tipificação da Equipe'])],
+                    ['Pertencente a equipe minima?', toUpperBR(campos['Pertencente a equipe minima?'])]
+                ]
+                 addTableSection('Dados da Equipe', dadosDaEquipe);
+
+    // Observações
+    addObservations(campos['Observações']);
+        } else if (formTitle === "Ficha 32") {
             const professionalFields = [
                 ['Nome completo',toUpperBR(campos['Nome completo'])],
                 ['CPF',toUpperBR(campos['CPF'])],
@@ -284,9 +337,7 @@ async function gerarPDF() {
                  addTableSection('Dados da Equipe', dadosDaEquipe);
 
                  addObservations(campos['Observações']);
-
-        } 
-        else if (formTitle === "Ficha 1") {   // FICHA 1 PDF
+        } else if (formTitle === "Ficha 1") {   // FICHA 1 PDF
             const professionalFields = [
                 ['CNPJ da Empresa', toUpperBR(campos['CNPJ da Empresa'])],
                 ['CNES da Empresa', toUpperBR(campos['CNES da Empresa'])],
@@ -311,7 +362,14 @@ async function gerarPDF() {
             ];
             addTableSection('DADOS DO ESTABELECIMENTO', establishmentFields);
             
-        } 
+} 
+
+
+
+
+
+
+
 
     const dadosFicha = {
         titulo: formTitle,
@@ -320,15 +378,15 @@ async function gerarPDF() {
      };
 
     try {
-  await fetch("http://localhost:3000/api/fichas", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(dadosFicha)
-  });
-  console.log("✅ Ficha enviada para o backend!");
-} catch (error) {
-  console.error("❌ Erro ao enviar:", error);
-}
+    await fetch("http://localhost:3000/api/fichas", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dadosFicha)
+    });
+    console.log("✅ Ficha enviada para o backend!");
+    } catch (error) {
+    console.error("❌ Erro ao enviar:", error);
+    }
 
 
 

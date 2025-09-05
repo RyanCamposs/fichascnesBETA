@@ -6,6 +6,162 @@
   <title>Formulário do CNES - Assinatura</title>
   <link rel="stylesheet" href="themes/style.css">
   <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: var(--bg, #f6f7fb);
+      color: var(--fg, #1f2937);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Tela de carregamento */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+    .spinner {
+      border: 6px solid #ddd;
+      border-top: 6px solid #2563eb;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Cabeçalho */
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+    #themeToggle {
+      background: white;
+      color: #2563eb;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    /* Conteúdo principal */
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: grid;
+      gap: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .page-header h2 {
+      font-size: 1.5rem;
+      color: #1f2937;
+    }
+    .btn-back {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .btn-back:hover {
+      background: #dc2626;
+    }
+
+    /* Cards */
+    .card-sign {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .card-sign h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      color: #2563eb;
+    }
+    .card-sign button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .card-sign button:hover {
+      background: #1d4ed8;
+    }
+    canvas {
+      display: block;
+      margin: 1rem 0;
+      border: 2px dashed #2563eb;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    .sig-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    .sig-buttons button {
+      flex: 1;
+    }
+
+    /* Rodapé */
+    footer {
+      background: #f1f5f9;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #374151;
+      border-top: 1px solid #e5e7eb;
+    }
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <!-- Tela de carregamento -->
@@ -15,7 +171,7 @@
 
   <!-- Cabeçalho -->
   <header>
-    <h1 onclick="voltarMenu()" style="cursor: pointer;">Formulários do CNES</h1>
+    <h1 onclick="voltarMenu()">Formulários do CNES</h1>
     <button id="themeToggle">🌙</button>
   </header>
 
@@ -23,18 +179,18 @@
   <main>
     <div class="page-header">
       <h2>Assinaturas</h2>
-      <button class="btn-back" onclick="window.location.href='index.html'">⬅ Voltar ao Menu</button>
+      <button class="btn-back" onclick="window.location.href='index.html'">Voltar</button>
     </div>
 
     <!-- Card Responsável -->
     <section class="card-sign">
       <h3>Assinatura do Responsável</h3>
-      <button onclick="assinarResponsavel()">✍ Assinar</button>
+      <button onclick="assinarResponsavel()">Assinar</button>
       <div id="sigSection2" class="hidden">
-        <canvas id="sigCanvasResponsavel" width="500" height="200" style="border: 1px solid black"></canvas>
+        <canvas id="sigCanvasResponsavel" width="500" height="200"></canvas>
         <div class="sig-buttons">
-          <button id="clearSigResponsavel">🧹 Limpar</button>
-          <button id="saveSigResponsavel">💾 Salvar</button>
+          <button id="clearSigResponsavel">Limpar</button>
+          <button id="saveSigResponsavel">Salvar</button>
         </div>
       </div>
     </section>
@@ -42,12 +198,12 @@
     <!-- Card Profissional -->
     <section class="card-sign">
       <h3>Assinatura do Profissional</h3>
-      <button onclick="assinarProfissional()">✍ Assinar</button>
-      <div id="sigSection3" class="hidden" >
-        <canvas id="sigCanvasProfissional" width="500" height="200" style="border: 1px solid black"></canvas>
+      <button onclick="assinarProfissional()">Assinar</button>
+      <div id="sigSection3" class="hidden">
+        <canvas id="sigCanvasProfissional" width="500" height="200"></canvas>
         <div class="sig-buttons">
-          <button id="clearSigProfissional">🧹 Limpar</button>
-          <button id="saveSigProfissional">💾 Salvar</button>
+          <button id="clearSigProfissional">Limpar</button>
+          <button id="saveSigProfissional">Salvar</button>
         </div>
       </div>
     </section>
@@ -55,19 +211,16 @@
 
   <!-- Rodapé -->
   <footer>
-    <div class="footer-box">
-      <p>Precisando de ajuda?
-        <a href="whatsapp://send?text=Estou com duvidas sobre o site!&phone=+556993966203">Clique aqui</a>
-        para nos enviar uma mensagem no WhatsApp
-      </p>
-    </div>
+    <p>Precisando de ajuda?
+      <a href="whatsapp://send?text=Estou com duvidas sobre o site!&phone=+556993966203">Clique aqui</a>
+      para nos enviar uma mensagem no WhatsApp
+    </p>
   </footer>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>  
-  <script src="themes/style.css"></script>
   <script src="./forms/forms.js"></script>
   <script src="pdf-generator/pdf-generator.js"></script>
   <script src="./teste/server.js"></script>
