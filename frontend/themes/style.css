@@ -430,6 +430,13 @@ li {
   .campo {
     min-width: 100%;
   }
+  #unidadeSelect {
+    max-width: 100%;
+  }
+
+  #perfilSelect {
+    max-width: 100%;
+  }
 
   button {
     width: 100%;

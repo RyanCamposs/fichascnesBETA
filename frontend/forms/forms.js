@@ -672,19 +672,8 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
     document.getElementById("btn-remove").classList.remove("hidden");
     document.getElementById("btn-copy").classList.add("hidden");
     formTitle.textContent = "Ficha 33";
-    formConteudo.innerHTML = `
-    <section class="ficha" id="fichaSelectProfile">
-            <h2>Selecione um perfil pré-preenchido</h2>
-            <div class="linha">
-                <select name="perfil" id="perfilSelect" style="padding: 10px">
-                    <option value="">Selecione um perfil</option>
-                    <option value="01">Perfil 1 - Pessoa Juridica</option>
-                    <option value="02">Perfil 2 - Vinculo Empregaticio</option>
-                    <option value="03">Perfil 3 - Residente</option>
-                </select>
-            </div>
-            </section>
-        <section class="ficha" id="fichaSection">
+    formConteudo.innerHTML = `        
+            <section class="ficha" id="fichaSection">
             <h2>DADOS DO PROFISSIONAL</h2>
             <div class="linha">
                 <div class="campo">
