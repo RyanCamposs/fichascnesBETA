@@ -121,7 +121,7 @@ function abrirFormulario(tipo) {
                     <option value="09">Unidade de Saude Albert Sabin Ref Hanseniase</option>
             </select>
 
-                <select name="perfil" id="perfilSelect">
+                <select name="perfil" id="perfilSelect" style="padding: 10px">
                     <option value="">Selecione um perfil</option>
                     <option value="01">Perfil 1 - Pessoa Juridica</option>
                     <option value="02">Perfil 2 - Celetista</option>
@@ -383,7 +383,7 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
     <section class="ficha" id="fichaSelectProfile">
             <h2>Selecione um perfil pré-preenchido</h2>
             <div class="linha">
-                <select name="perfil" id="perfilSelect">
+                <select name="perfil" id="perfilSelect" style="padding: 10px">
                     <option value="">Selecione um perfil</option>
                     <option value="01">Perfil 1 - Pessoa Juridica</option>
                     <option value="02">Perfil 2 - Vinculo Empregaticio</option>
