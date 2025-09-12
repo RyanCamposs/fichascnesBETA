@@ -39,19 +39,19 @@ const unidadesPrePreenchidas = {
 
 
 const perfisPrePreenchidos = {
-    "01": { // Perfil 1 - Pessoa Jurídica
+    "p1": { // Perfil 1 - Pessoa Jurídica
         "Observações": "Perfil pré-preenchido para pessoa jurídica",
         "contratacaoEstabelecimento": "autonomo",
         "contratacaoEmpregador": "Pessoa Juridica",
         "detalhamentoContratacao": "Não se aplica"
     },
-    "02": { // Perfil 2 - Celetista
+    "p2": { // Perfil 2 - Celetista
         "Observações": "Perfil pré-preenchido para Celetista",
         "contratacaoEstabelecimento": "empregaticio",
         "contratacaoEmpregador": "Celetista",
         "detalhamentoContratacao": "Não se aplica"
     },
-    "03": { // Perfil 3 - Residente
+    "p3": { // Perfil 3 - Residente
         "Observações": "Perfil pré-preenchido para residente",
         "contratacaoEstabelecimento": "residencia",
         "contratacaoEmpregador": "Residente",

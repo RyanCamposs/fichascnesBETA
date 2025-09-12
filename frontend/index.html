@@ -3,122 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulários do CNES</title>
-  <link rel="stylesheet" href="themes/style.css" />
+  <title>Página Inicial — Formulários do CNES</title>
   <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
-  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
 
-</head> 
+    body {
+      height: 100vh;
+      display: flex;
+      background: #f9fafc;
+      color: #2c3e50;
+    }
+
+    .left, .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .left {
+      flex-direction: column;
+      text-align: left;
+      animation: slideIn 1s ease forwards;
+    }
+
+    .left img {
+      width: 70px;
+      margin-bottom: 1.5rem;
+    }
+
+    .left h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #1abc9c;
+    }
+
+    .left p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: #555;
+      max-width: 420px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background: #1abc9c;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #16a085;
+      transform: translateY(-2px);
+    }
+
+    .right {
+      background: linear-gradient(135deg, #1abc9c, #16a085);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top-left-radius: 60px;
+      border-bottom-left-radius: 60px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .right img {
+      max-width: 90%;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    footer a {
+      color: #1abc9c;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .right {
+        border-radius: 0;
+        height: 250px;
+      }
+    }
+  </style>
+</head>
 <body>
-<div id="loading-screen">
-  <div class="spinner"></div>
-</div>
+  <div class="left">
+    <img src="img/logo.png" alt="Logo CNES">
+    <h1>Formulários do CNES</h1>
+    <p>
+      Acesse os formulários oficiais do CNES de maneira prática, moderna e rápida.  
+      Preencha suas fichas com segurança e gere relatórios em PDF instantaneamente.
+    </p>
+    <a href="fichas.html" class="btn">📑 Acessar Formulários</a>
+  </div>
 
-<div id="main-content">
-  <header>
-    <h1 onclick="voltarMenu()" style="cursor: pointer;">Formulários do CNES</h1>
-    <button id="themeToggle">🌙</button>
-  </header>
-  
-  <main>
-    <section id="menu">
-      <h2>Escolha uma ficha</h2>
-      <div class="fichas">
-        <div class="card" onclick="abrirFormulario('ficha1')">
-          <h3>Ficha 1</h3>
-          <p>Módulo Básico [Empresa]</p>
-        </div>
-        <div class="card" onclick="abrirFormulario('ficha31')">
-          <h3>Ficha 31</h3>
-          <p>Profissional [Sem Equipe]</p>
-        </div>
-        <div class="card" onclick="abrirFormulario('ficha32')">
-          <h3>Ficha 32</h3>
-          <p>Profissional [Com Equipe]</p>
-        </div>
-        </div>
+  <div class="right">
+    <img src="img/demonstration.png" alt="Ilustração Formulários">
+  </div>
 
-        <div class="fichas" style="margin-top: 10px;">
-          <div class="card" onclick="abrirFormulario('ficha33')">
-          <h3>Ficha 33</h3>
-          <p>Transferência de Profissional [Com Equipe]</p>
-        </div>
-        <div class="card" onclick="abrirFormulario('ficha34')">
-          <h3>Ficha 34</h3>
-          <p>Transferência de Profissional [Sem Equipe]</p>
-        </div>
-        </div>
-        
-
-      
-
-      <h2>Outros Arquivos</h2>
-      <div class="fichas">
-        <div class="card" onclick="abrirFormulario('listacbo')">
-          <h3>Lista de CBO's</h3>
-          <p>Contém todos os cbo's</p>
-        </div>
-        <!-- <div class="card" onclick="abrirFormulario('futuro')">
-          <h3>--------</h3>
-        </div> -->
-        <div class="card">
-          <h3><a href="signature.html">Assinatura Online</a></h3>
-          <p>Menu de assinatura</p>
-        </div>
-
-
-      </div>
-    </section>
-
-    <section id="formulario" class="hidden">
-      <h2 id="formTitle">Formulário</h2>
-      <form id="formConteudo"></form>
-      <div class="form-buttons">
-        <button onclick="voltarMenu()">Voltar</button>
-        <button onclick="gerarPDF()" id="btn-remove">Gerar PDF</button>
-        <button class="hidden" id="btn-copy">Copiar CBO</button>
-        <div id="result"></div>
-      </div>
-
-     
-
-     
-  </section>
-</main>
-
-  <section id="dashboard" class="hidden">
-  <h2>Dashboard de Uso</h2>
-  <div class="dashboard-cards">
-    <div class="dash-card">
-      <h3 id="pdfCount">0</h3>
-      <p>PDFs Gerados</p>
-    </div>
-
-  </section>
-</div>
-
-    <footer>
-    <div class="footer-box">
-      <p>Precisando de ajuda? <a href="whatsapp://send?text=Estou com duvidas sobre o site!&phone=+556993966203">Clique aqui</a> para nos enviar uma mensagem no WhatsApp</p>   
-    </div>
+  <footer>
+    © 2025 — Sistema CNES | <a href="whatsapp://send?text=Olá! Preciso de ajuda no sistema&phone=+556993966203">Suporte via WhatsApp</a>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-  <script src="themes/theme.js"></script>
-  <script src="./forms/forms.js"></script>
-  <script src="pdf-generator/pdf-generator.js"></script>
-  <script src="./teste/server.js"></script>
-  <script src="./forms/loading.js"></script>
-  <script src="./signature.js"></script>
-  <script src="./presaves/presave.js"></script>
-  <script>
-    function voltarMenu() {
-    document.getElementById("formulario").classList.add("hidden");
-    document.getElementById("menu").classList.remove("hidden");
-}
-
-  </script>
-
 </body>
 </html>

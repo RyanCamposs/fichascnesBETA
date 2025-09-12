@@ -123,9 +123,9 @@ function abrirFormulario(tipo) {
 
                 <select name="perfil" id="perfilSelect" style="padding: 10px">
                     <option value="">Selecione um perfil</option>
-                    <option value="01">Perfil 1 - Pessoa Juridica</option>
-                    <option value="02">Perfil 2 - Celetista</option>
-                    <option value="03">Perfil 3 - Residente</option>
+                    <option value="p1">Perfil 1 - Pessoa Juridica</option>
+                    <option value="p2">Perfil 2 - Celetista</option>
+                    <option value="p3">Perfil 3 - Residente</option>
                 </select>
             </div>
             </section>
@@ -385,9 +385,9 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
             <div class="linha">
                 <select name="perfil" id="perfilSelect" style="padding: 10px">
                     <option value="">Selecione um perfil</option>
-                    <option value="01">Perfil 1 - Pessoa Juridica</option>
-                    <option value="02">Perfil 2 - Vinculo Empregaticio</option>
-                    <option value="03">Perfil 3 - Residente</option>
+                    <option value="p1">Perfil 1 - Pessoa Juridica</option>
+                    <option value="p2">Perfil 2 - Vinculo Empregaticio</option>
+                    <option value="p3">Perfil 3 - Residente</option>
                 </select>
 
                 <select name="unidade" id="unidadeSelect" style="padding: 10px"> 
@@ -839,7 +839,7 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
                     <span>Forma de Contratação Estabelecimento Receptor:</span>
                     <select id="contratacaoEstabelecimentoReceptor" name="Forma de Contratação Estabelecimento Receptor" required>
                         <option value="">Selecione</option>
-                        <option value="01 - empregaticio">01 - Vínculo Empregatício</option>
+                        <option value="empregaticio">01 - Vínculo Empregatício</option>
                         <option value="autonomo">Autônomo</option>
                         <option value="residencia">Residência</option>
                         <option value="estagio">Estágio</option>
