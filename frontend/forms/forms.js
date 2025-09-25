@@ -542,6 +542,7 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
             </section>
 
             <section class="ficha"> 
+                <h2>DADOS DA EQUIPE</h2>
                 <div class="linha">
                     <div class="campo">
                         <span>INE da Equipe</span>

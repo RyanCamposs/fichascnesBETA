@@ -384,7 +384,7 @@ li {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    background: linear-gradient(135deg, #c1bfce, #f8ece8);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -395,7 +395,7 @@ li {
   /* Animação do spinner */
   .spinner {
     border: 8px solid #f3f3f3;
-    border-top: 8px solid #ff416c;
+    border-top: 8px solid #ff4b75;
     border-radius: 50%;
     width: 80px;
     height: 80px;
