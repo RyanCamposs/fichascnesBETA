@@ -113,7 +113,7 @@ async function gerarPDF() {
                 doc.setFont('helvetica', 'normal');
                 doc.text(value?.toString() || '-', margin + labelWidth + 2, y + 5);
 
-                y += 6;
+                y += 8;
             });
             y += 4;
         };
@@ -200,18 +200,18 @@ async function gerarPDF() {
     // Estabelecimento Cedente
     const cedenteFields = [
         ['CNES Cedente', toUpperBR(campos['CNES Cedente'])],
-        ['Nome Fantasia do Cedente', toUpperBR(campos['Nome fantasia do Cedente'])],
+        ['Nome Fantasia do Cedente', toUpperBR(campos['Nome Fantasia do Cedente'])],
         ['CBO do Profissional Cedido', toUpperBR(campos['CBO do Profissional Cedido'])],
         ['CH Amb', toUpperBR(campos['CH Amb'])],
         ['CH Hosp', toUpperBR(campos['CH Hosp'])],
         ['CH Outros', toUpperBR(campos['CH Outros'])],
-        ['Registro no Conselho Profissional Cedido', toUpperBR(campos['Registro no Conselho Profissional Cedido'])],
+        ['Registro no Conselho do Profissional Cedido', toUpperBR(campos['Registro no Conselho do Profissional Cedido'])],
         ['Órgão Emissor Cedente', toUpperBR(campos['Órgão Emissor Cedente'])],
         ['UF Conselho Cedente', toUpperBR(campos['UF Conselho Cedente'])],
         ['Atend SUS', toUpperBR(campos['Atend SUS'])],
-        ['Contratação Estabelecimento Cedente', toUpperBR(campos['Contratação Estabelecimento Cedente'])],
-        ['Contratação Empregador Cedente', toUpperBR(campos['Contratação Empregador Cedente'])],
-        ['Detalhamento Cedente', toUpperBR(campos['Detalhamento Cedente'])],
+        ['Forma de Contratação Estabelecimento Cedente', toUpperBR(campos['Forma de Contratação Estabelecimento Cedente'])],
+        ['Forma de Contratação Empregador Cedente', toUpperBR(campos['Forma de Contratação Empregador Cedente'])],
+        ['Detalhamento da Contratação do Cedente', toUpperBR(campos['Detalhamento da Contratação do Cedente'])],
         ['CNPJ Cedente', toUpperBR(campos['CNPJ Cedente'])]
     ];
     addTableSection('ESTABELECIMENTO CEDENTE', cedenteFields);
@@ -227,7 +227,7 @@ async function gerarPDF() {
         ['Registro no Conselho Receptor', toUpperBR(campos['Registro no Conselho Receptor'])],
         ['Órgão Emissor Receptor', toUpperBR(campos['Órgão Emissor Receptor'])],
         ['UF Conselho Receptor', toUpperBR(campos['UF Conselho Receptor'])],
-        ['Atend SUS Receptor', toUpperBR(['Atend SUS Receptor'])],
+        ['Atend SUS Receptor', toUpperBR(campos['Atend SUS Receptor'])],
         ['Forma de Contratação Estabelecimento Receptor', toUpperBR(campos['Forma de Contratação Estabelecimento Receptor'])],
         ['Forma de Contratação Empregador Receptor', toUpperBR(campos['Forma de Contratação Empregador Receptor'])],
         ['Detalhamento da Contratação Receptor', toUpperBR(campos['Detalhamento da Contratação Receptor'])],
@@ -239,7 +239,7 @@ async function gerarPDF() {
     addObservations(campos['Observações']);
         } else if (formTitle === "Ficha 34") {
     // Seção Dados do Profissional
-    const professionalFields = [
+       const professionalFields = [
         ['Nome completo', toUpperBR(campos['Nome completo'])],
         ['CPF', toUpperBR(campos['CPF'])],
         ['CNS', toUpperBR(campos['CNS'])],
@@ -251,18 +251,18 @@ async function gerarPDF() {
     // Estabelecimento Cedente
     const cedenteFields = [
         ['CNES Cedente', toUpperBR(campos['CNES Cedente'])],
-        ['Nome Fantasia do Cedente', toUpperBR(campos['Nome fantasia do Cedente'])],
+        ['Nome Fantasia do Cedente', toUpperBR(campos['Nome Fantasia do Cedente'])],
         ['CBO do Profissional Cedido', toUpperBR(campos['CBO do Profissional Cedido'])],
         ['CH Amb', toUpperBR(campos['CH Amb'])],
         ['CH Hosp', toUpperBR(campos['CH Hosp'])],
         ['CH Outros', toUpperBR(campos['CH Outros'])],
-        ['Registro no Conselho Profissional Cedido', toUpperBR(campos['Registro no Conselho Profissional Cedido'])],
+        ['Registro no Conselho do Profissional Cedido', toUpperBR(campos['Registro no Conselho do Profissional Cedido'])],
         ['Órgão Emissor Cedente', toUpperBR(campos['Órgão Emissor Cedente'])],
         ['UF Conselho Cedente', toUpperBR(campos['UF Conselho Cedente'])],
         ['Atend SUS', toUpperBR(campos['Atend SUS'])],
-        ['Contratação Estabelecimento Cedente', toUpperBR(campos['Contratação Estabelecimento Cedente'])],
-        ['Contratação Empregador Cedente', toUpperBR(campos['Contratação Empregador Cedente'])],
-        ['Detalhamento Cedente', toUpperBR(campos['Detalhamento Cedente'])],
+        ['Forma de Contratação Estabelecimento Cedente', toUpperBR(campos['Forma de Contratação Estabelecimento Cedente'])],
+        ['Forma de Contratação Empregador Cedente', toUpperBR(campos['Forma de Contratação Empregador Cedente'])],
+        ['Detalhamento da Contratação do Cedente', toUpperBR(campos['Detalhamento da Contratação do Cedente'])],
         ['CNPJ Cedente', toUpperBR(campos['CNPJ Cedente'])]
     ];
     addTableSection('ESTABELECIMENTO CEDENTE', cedenteFields);
@@ -278,16 +278,17 @@ async function gerarPDF() {
         ['Registro no Conselho Receptor', toUpperBR(campos['Registro no Conselho Receptor'])],
         ['Órgão Emissor Receptor', toUpperBR(campos['Órgão Emissor Receptor'])],
         ['UF Conselho Receptor', toUpperBR(campos['UF Conselho Receptor'])],
-        ['Atend SUS Receptor', toUpperBR(['Atend SUS Receptor'])],
+        ['Atend SUS Receptor', toUpperBR(campos['Atend SUS Receptor'])],
         ['Forma de Contratação Estabelecimento Receptor', toUpperBR(campos['Forma de Contratação Estabelecimento Receptor'])],
         ['Forma de Contratação Empregador Receptor', toUpperBR(campos['Forma de Contratação Empregador Receptor'])],
         ['Detalhamento da Contratação Receptor', toUpperBR(campos['Detalhamento da Contratação Receptor'])],
         ['CNPJ Receptor', toUpperBR(campos['CNPJ Receptor'])]
     ];
     addTableSection('ESTABELECIMENTO RECEPTOR', receptorFields);
+
     const dadosDaEquipe = [
-                    ['INE da Equipe', toUpperBR(campos['INE da Equipe'])],
-                    ['Tipificação da Equipe', toUpperBR(campos['Tipificação da Equipe'])],
+                    ['INE da Equipe Receptor', toUpperBR(campos['INE da Equipe Receptor'])],
+                    ['Tipificação da Equipe Receptor', toUpperBR(campos['Tipificação da Equipe Re'])],
                     ['Pertencente a equipe minima?', toUpperBR(campos['Pertencente a equipe minima?'])]
                 ]
                  addTableSection('Dados da Equipe', dadosDaEquipe);
@@ -299,7 +300,7 @@ async function gerarPDF() {
                 ['Nome completo',toUpperBR(campos['Nome completo'])],
                 ['CPF',toUpperBR(campos['CPF'])],
                 ['CNS',toUpperBR(campos['CNS'])],
-                ['Nome da Mãe',toUpperBR(ampos['Nome da Mãe'])],
+                ['Nome da Mãe',toUpperBR(campos['Nome da Mãe'])],
                 ['Nome do Pai',toUpperBR(campos['Nome do Pai'])],
                 ['Data de Nascimento',toUpperBR(campos['Data de Nascimento'])],
                 ['Municipio',toUpperBR(campos['Municipio'])],

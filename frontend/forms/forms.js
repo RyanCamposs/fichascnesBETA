@@ -383,14 +383,7 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
     <section class="ficha" id="fichaSelectProfile">
             <h2>Selecione um perfil pré-preenchido</h2>
             <div class="linha">
-                <select name="perfil" id="perfilSelect" style="padding: 10px">
-                    <option value="">Selecione um perfil</option>
-                    <option value="p1">Perfil 1 - Pessoa Juridica</option>
-                    <option value="p2">Perfil 2 - Vinculo Empregaticio</option>
-                    <option value="p3">Perfil 3 - Residente</option>
-                </select>
-
-                <select name="unidade" id="unidadeSelect" style="padding: 10px"> 
+                    <select name="unidade" id="unidadeSelect" style="padding: 10px"> 
                     <option value="">Selecione uma unidade</option>
                     <option value="01">UBS Albert Sabin</option>
                     <option value="02">UBS Beira Rio</option>
@@ -402,6 +395,14 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
                     <option value="08">Unidade de Pronto Atendimento Dra Luci Emiko Kitamura</option>
                     <option value="09">Unidade de Saude Albert Sabin Ref Hanseniase</option>
             </select>
+
+                <select name="perfil" id="perfilSelect" style="padding: 10px">
+                    <option value="">Selecione um perfil</option>
+                    <option value="p1">Perfil 1 - Pessoa Juridica</option>
+                    <option value="p2">Perfil 2 - Vinculo Empregaticio</option>
+                    <option value="p3">Perfil 3 - Residente</option>
+                </select>
+
             </div>
             </section>
                 <h2>DADOS DO PROFISSIONAL</h2>
@@ -711,8 +712,8 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
                     <input type="text" name="CNES Cedente" />
                 </div>
                 <div class="campo">
-                    <span>Nome Fantasia Cedente:</span>
-                    <input type="text" name="Nome Fantasia Cedente" required/>
+                    <span>Nome Fantasia do Cedente:</span>
+                    <input type="text" name="Nome Fantasia do Cedente" required/>
                 </div>
             </div>
             <div class="linha">
@@ -739,8 +740,8 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>Registro no Conselho Profissional Cedido</span>
-                    <input type="text" name="Registro no Conselho Profissional Cedido" required/>
+                    <span>Registro no Conselho do Profissional Cedido:</span>
+                    <input type="text" name="Registro no Conselho do Profissional Cedido" required/>
                 </div>
                 <div class="campo">
                     <span>Órgão Emissor:</span>
@@ -753,7 +754,7 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>Forma de Contratação :</span>
+                    <span>Forma de Contratação Estabelecimento Cedente: </span>
                     <select id="contratacaoEstabelecimentoCedente" name="Forma de Contratação Estabelecimento Cedente" required>
                         <option value="">Selecione</option>
                         <option value="empregaticio">Vínculo Empregatício</option>
@@ -766,21 +767,21 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
                     </select>
                 </div>
                 <div class="campo">
-                    <span>Forma de Contratação (Empregador):</span>
-                    <select id="contratacaoEmpregadorCedente" name="Contratação Empregador Cedente" disabled>
+                    <span>Forma de Contratação Empregador Cedente:</span>
+                    <select id="contratacaoEmpregadorCedente" name="Forma de Contratação Empregador Cedente" disabled>
                         <option value="">Selecione primeiro o Estabelecimento</option>
                     </select>
                 </div>
                 <div class="campo">
-                    <span>Detalhamento da Contratação:</span>
-                    <select id="detalhamentoContratacaoCedente" name="Detalhamento Cedente" disabled>
+                    <span>Detalhamento da Contratação do Cedente:</span>
+                    <select id="detalhamentoContratacaoCedente" name="Detalhamento da Contratação do Cedente" disabled>
                         <option value="">Selecione primeiro o Empregador</option>
                     </select>
                 </div>       
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>CNPJ:</span>
+                    <span>CNPJ Cedente:</span>
                     <input type="text" name="CNPJ Cedente"/>
                 </div>
             </div>
@@ -1023,7 +1024,7 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
     document.getElementById("btn-copy").classList.add("hidden");
     formTitle.textContent = "Ficha 34";
     formConteudo.innerHTML = `        
-            <section class="ficha" id="fichaSection">
+             <section class="ficha" id="fichaSection">
             <h2>DADOS DO PROFISSIONAL</h2>
             <div class="linha">
                 <div class="campo">
@@ -1060,8 +1061,8 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
                     <input type="text" name="CNES Cedente" />
                 </div>
                 <div class="campo">
-                    <span>Nome Fantasia Cedente:</span>
-                    <input type="text" name="Nome Fantasia Cedente" required/>
+                    <span>Nome Fantasia do Cedente:</span>
+                    <input type="text" name="Nome Fantasia do Cedente" required/>
                 </div>
             </div>
             <div class="linha">
@@ -1088,8 +1089,8 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>Registro no Conselho Profissional Cedido</span>
-                    <input type="text" name="Registro no Conselho Profissional Cedido" required/>
+                    <span>Registro no Conselho do Profissional Cedido:</span>
+                    <input type="text" name="Registro no Conselho do Profissional Cedido" required/>
                 </div>
                 <div class="campo">
                     <span>Órgão Emissor:</span>
@@ -1102,7 +1103,7 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>Forma de Contratação :</span>
+                    <span>Forma de Contratação Estabelecimento Cedente: </span>
                     <select id="contratacaoEstabelecimentoCedente" name="Forma de Contratação Estabelecimento Cedente" required>
                         <option value="">Selecione</option>
                         <option value="empregaticio">Vínculo Empregatício</option>
@@ -1115,21 +1116,21 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
                     </select>
                 </div>
                 <div class="campo">
-                    <span>Forma de Contratação (Empregador):</span>
-                    <select id="contratacaoEmpregadorCedente" name="Contratação Empregador Cedente" disabled>
+                    <span>Forma de Contratação Empregador Cedente:</span>
+                    <select id="contratacaoEmpregadorCedente" name="Forma de Contratação Empregador Cedente" disabled>
                         <option value="">Selecione primeiro o Estabelecimento</option>
                     </select>
                 </div>
                 <div class="campo">
-                    <span>Detalhamento da Contratação:</span>
-                    <select id="detalhamentoContratacaoCedente" name="Detalhamento Cedente" disabled>
+                    <span>Detalhamento da Contratação do Cedente:</span>
+                    <select id="detalhamentoContratacaoCedente" name="Detalhamento da Contratação do Cedente" disabled>
                         <option value="">Selecione primeiro o Empregador</option>
                     </select>
                 </div>       
             </div>
             <div class="linha">
                 <div class="campo">
-                    <span>CNPJ:</span>
+                    <span>CNPJ Cedente:</span>
                     <input type="text" name="CNPJ Cedente"/>
                 </div>
             </div>
@@ -1189,7 +1190,7 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
                     <span>Forma de Contratação Estabelecimento Receptor:</span>
                     <select id="contratacaoEstabelecimentoReceptor" name="Forma de Contratação Estabelecimento Receptor" required>
                         <option value="">Selecione</option>
-                        <option value="01 - empregaticio">01 - Vínculo Empregatício</option>
+                        <option value="empregaticio">01 - Vínculo Empregatício</option>
                         <option value="autonomo">Autônomo</option>
                         <option value="residencia">Residência</option>
                         <option value="estagio">Estágio</option>
@@ -1218,6 +1219,8 @@ document.getElementById("unidadeSelect").addEventListener("change", function() {
                 </div>
             </div>
         </section>
+
+      
         <section class="ficha"> 
         <h2>DADOS DA EQUIPE</h2>
                 <div class="linha">
